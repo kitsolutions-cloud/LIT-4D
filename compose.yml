@@ -1,0 +1,8 @@
+services:
+  mailing_provider:
+    env_file:
+      - .mailing_provider.env
+    build:
+      context: ./mailing_provider
+    ports:
+      - 1080:1080

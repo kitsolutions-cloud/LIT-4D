@@ -1,0 +1,4 @@
+services:
+  mailing_provider:
+    ports:
+      - 1025:1025

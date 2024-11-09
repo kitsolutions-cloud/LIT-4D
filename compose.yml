@@ -1,8 +1,32 @@
 services:
   mailing_provider:
-    env_file:
-      - .mailing_provider.env
     build:
       context: ./mailing_provider
+    env_file:
+      - ./mailing_provider/.env
     ports:
       - 1080:1080
+
+  oauth_provider:
+    build:
+      context: ./oauth_provider
+    env_file:
+      - ./oauth_provider/.env
+    ports:
+      - 8080:8080
+    depends_on:
+      sqldb_provider:
+        condition: service_started
+
+  sqldb_provider:
+    build:
+      context: ./sqldb_provider
+    env_file:
+      - ./sqldb_provider/.env
+    restart: unless-stopped
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s

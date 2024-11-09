@@ -4,3 +4,18 @@ services:
       - 1025:1025
     command:
       - --log-mail-contents
+
+  oauth_provider:
+    ports:
+      - 9000:9000
+    command:
+      - start-dev
+
+  sqldb_provider:
+    ports:
+      - 5432:5432
+
+  chat2db:
+    image: chat2db/chat2db
+    ports:
+      - 5433:10824

@@ -25,6 +25,7 @@ Only setup the declaration of environment variables inside of *.env services fil
 MAILING_PROVIDER_ENABLE=true
 # and goes on...
 ```
+
 Run `docker compose up -d` and check the ports available
 
 ## Future plans

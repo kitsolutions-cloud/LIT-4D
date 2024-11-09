@@ -21,7 +21,7 @@ Accessible on ports 1025 & [1080](http://localhost:1080)
 SMTP connection for configure client
 
 ```dotenv
-host=localhost
+host=localhost # or `mailing_provider` if you are connecting throught docker network
 port=1025
 sender|user=mail.sender@test.com
 password=changeit
@@ -55,7 +55,7 @@ password=changeit
 ### 📦 SQL database provider with [postgres](https://github.com/docker-library/docs/blob/master/postgres/README.md)
 
 ```dotenv
-host=localhost
+host=localhost # or `sqldb_provider` if you are connecting throught docker network
 port=5432
 user=postgres
 password=d59b44d359cbd2e55cb76f2381a4b4a45560a8df

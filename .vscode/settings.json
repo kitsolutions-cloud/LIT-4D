@@ -1,0 +1,8 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["**/*.realm.json"],
+      "url": "https://jirutka.github.io/keycloak-json-schema/keycloak-realm-26.0.2.json" 
+    },
+  ],
+}

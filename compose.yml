@@ -5,7 +5,7 @@ services:
     env_file:
       - ./mailing_provider/.env
     ports:
-      - 1080:1080
+      - "1080:1080"
 
   oauth_provider:
     build:
@@ -13,7 +13,7 @@ services:
     env_file:
       - ./oauth_provider/.env
     ports:
-      - 8080:8080
+      - "8080:8080"
     depends_on:
       sqldb_provider:
         condition: service_started
@@ -30,3 +30,10 @@ services:
       retries: 5
       start_period: 30s
       timeout: 10s
+
+  sqldbmngr_provider:
+    image: chat2db/chat2db
+    env_file:
+      - ./sqldb_provider/.env
+    ports:
+      - "5433:10824"

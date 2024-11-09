@@ -1,0 +1,50 @@
+{
+  "id": "38824794-d3ce-4c84-bf42-edee3c79bea1",
+  "realm": "LFIS4D",
+  "displayName": "Local Foundation Integration Services 4 Devs",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationEmailAsUsername": true,
+  "rememberMe": true,
+  "verifyEmail": true,
+  "loginWithEmailAllowed": true,
+  "smtpServer": {
+    "from": "security-lfis4d@test.com",
+    "fromDisplayName": "Security LFIS4D",
+    "replyTo": "no-reply@test.com",
+    "auth": "true",
+    "user": "mail.sender@test.com",
+    "password": "changeit",
+    "starttls": "false",
+    "host": "mailing_provider",
+    "port": "1025",
+    "ssl": "false"
+  },
+  "userManagedAccessAllowed": true,
+  "internationalizationEnabled": true,
+  "supportedLocales": ["pt-BR", "en"],
+  "users": [
+    {
+      "username": "common.user@test.com",
+      "firstName": "User",
+      "lastName": "Foo",
+      "email": "common.user@test.com",
+      "emailVerified": true,
+      "attributes": {
+        "locale": ["pt-BR"]
+      },
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "temporary": true,
+          "value": "changeit"
+        }
+      ],
+      "requiredActions": ["UPDATE_PASSWORD"],
+      "clientRoles": {
+        "account": ["view-profile", "manage-account"]
+      }
+    }
+  ]
+}

@@ -4,6 +4,7 @@ services:
       context: ./mailing_provider
     env_file:
       - ./mailing_provider/.env
+    restart: unless-stopped
     ports:
       - "1080:1080"
 
@@ -12,6 +13,7 @@ services:
       context: ./oauth_provider
     env_file:
       - ./oauth_provider/.env
+    restart: unless-stopped
     ports:
       - "8080:8080"
     depends_on:
@@ -25,7 +27,7 @@ services:
       - ./sqldb_provider/.env
     restart: unless-stopped
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}']
       interval: 10s
       retries: 5
       start_period: 30s
@@ -35,5 +37,6 @@ services:
     image: chat2db/chat2db
     env_file:
       - ./sqldb_provider/.env
+    restart: unless-stopped
     ports:
       - "5433:10824"

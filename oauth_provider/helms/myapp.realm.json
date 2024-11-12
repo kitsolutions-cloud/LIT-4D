@@ -1,0 +1,345 @@
+{
+  "realm": "myapp",
+  "displayName": "My App",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": true,
+  "rememberMe": true,
+  "verifyEmail": true,
+  "loginWithEmailAllowed": true,
+  "smtpServer": {
+    "from": "notification.sender@myapp.com",
+    "fromDisplayName": "Notification Sender - MY APP",
+    "replyTo": "no-reply@myapp.com",
+    "auth": "true",
+    "user": "mail.sender@smtp-provider.com",
+    "password": "changeit",
+    "starttls": "false",
+    "host": "smtp-provider.com",
+    "port": "25",
+    "ssl": "false"
+  },
+  "userManagedAccessAllowed": true,
+  "internationalizationEnabled": true,
+  "supportedLocales": [
+    "pt-BR",
+    "en",
+    "es"
+  ],
+  "clients": [
+    {
+      "clientId": "myapp-client",
+      "name": "My App Client",
+      "description": "Client to access app managent app.",
+      "rootUrl": "http://localhost:5173",
+      "adminUrl": "http://localhost:5173",
+      "baseUrl": "http://localhost:5173/dashboard",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "redirectUris": [
+        "/*"
+      ],
+      "webOrigins": [
+        "*"
+      ],
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": true,
+      "frontchannelLogout": true,
+      "protocol": "openid-connect",
+      "fullScopeAllowed": true,
+      "defaultClientScopes": [
+        "web-origins",
+        "address",
+        "phone",
+        "offline_access",
+        "profile",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "acr",
+        "organization",
+        "roles",
+        "microprofile-jwt",
+        "basic"
+      ]
+    }
+  ],
+  "roles": {
+    "client": {
+      "myapp-client": [
+        {
+          "name": "APP_USER",
+          "description": "Common user that can access simple app resources.",
+          "composite": false,
+          "clientRole": true
+        },
+        {
+          "name": "APP_ADMIN",
+          "description": "Administrative access to app resources and manage new users on platform.",
+          "composite": true,
+          "composites": {
+            "client": {
+              "myapp-client": [
+                "APP_MANAGER"
+              ]
+            }
+          },
+          "clientRole": true
+        },
+        {
+          "name": "APP_OWNER",
+          "description": "Owner's app role.",
+          "composite": true,
+          "composites": {
+            "client": {
+              "myapp-client": [
+                "APP_ADMIN"
+              ]
+            }
+          },
+          "clientRole": true
+        },
+        {
+          "name": "APP_STAFF",
+          "description": "Simple access to manage app basic resources and basic actions.",
+          "composite": true,
+          "composites": {
+            "client": {
+              "myapp-client": [
+                "APP_USER"
+              ]
+            }
+          },
+          "clientRole": true
+        },
+        {
+          "name": "APP_MANAGER",
+          "description": "Manager access to app resources. Whose need higher privileges to manage app resources and actions.",
+          "composite": true,
+          "composites": {
+            "client": {
+              "myapp-client": [
+                "APP_STAFF"
+              ]
+            }
+          },
+          "clientRole": true
+        }
+      ]
+    }
+  },
+  "groups": [
+    {
+      "name": "APP_USER",
+      "path": "/APP_USER",
+      "subGroups": [
+        {
+          "name": "APP_ADMIN",
+          "path": "/APP_USER/APP_ADMIN",
+          "clientRoles": {
+            "myapp-client": [
+              "APP_ADMIN"
+            ]
+          }
+        },
+        {
+          "name": "MANAGER",
+          "path": "/APP_USER/APP_MANAGER",
+          "clientRoles": {
+            "myapp-client": [
+              "APP_MANAGER"
+            ]
+          }
+        },
+        {
+          "name": "APP_OWNER",
+          "path": "/APP_USER/APP_OWNER",
+          "clientRoles": {
+            "myapp-client": [
+              "APP_OWNER"
+            ]
+          }
+        },
+        {
+          "name": "APP_STAFF",
+          "path": "/APP_USER/APP_STAFF",
+          "clientRoles": {
+            "myapp-client": [
+              "APP_STAFF"
+            ]
+          }
+        }
+      ],
+      "clientRoles": {
+        "myapp-client": [
+          "APP_USER"
+        ]
+      }
+    }
+  ],
+  "users": [
+    {
+      "username": "user@myapp.com",
+      "firstName": "Common",
+      "lastName": "User",
+      "email": "user@myapp.com",
+      "emailVerified": true,
+      "attributes": {
+        "locale": [
+          "pt-BR"
+        ]
+      },
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "temporary": true,
+          "value": "changeit"
+        }
+      ],
+      "requiredActions": [
+        "UPDATE_PASSWORD"
+      ],
+      "clientRoles": {
+        "account": [
+          "view-profile",
+          "manage-account"
+        ]
+      },
+      "groups": [
+        "/APP_USER"
+      ]
+    },
+    {
+      "username": "staff-user@myapp.com",
+      "firstName": "Staff",
+      "lastName": "User",
+      "email": "staff-user@myapp.com",
+      "emailVerified": true,
+      "attributes": {
+        "locale": [
+          "pt-BR"
+        ]
+      },
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "temporary": true,
+          "value": "changeit"
+        }
+      ],
+      "requiredActions": [
+        "UPDATE_PASSWORD"
+      ],
+      "clientRoles": {
+        "account": [
+          "view-profile",
+          "manage-account"
+        ]
+      },
+      "groups": [
+        "/APP_USER/APP_STAFF"
+      ]
+    },
+    {
+      "username": "manager-user@myapp.com",
+      "firstName": "Manager",
+      "lastName": "User",
+      "email": "staff-user@myapp.com",
+      "emailVerified": true,
+      "attributes": {
+        "locale": [
+          "pt-BR"
+        ]
+      },
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "temporary": true,
+          "value": "changeit"
+        }
+      ],
+      "requiredActions": [
+        "UPDATE_PASSWORD"
+      ],
+      "clientRoles": {
+        "account": [
+          "view-profile",
+          "manage-account"
+        ]
+      },
+      "groups": [
+        "/APP_USER/APP_MANAGER"
+      ]
+    },
+    {
+      "username": "admin-user@myapp.com",
+      "firstName": "Admin",
+      "lastName": "User",
+      "email": "admin-user@myapp.com",
+      "emailVerified": true,
+      "attributes": {
+        "locale": [
+          "pt-BR"
+        ]
+      },
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "temporary": true,
+          "value": "changeit"
+        }
+      ],
+      "requiredActions": [
+        "UPDATE_PASSWORD"
+      ],
+      "clientRoles": {
+        "account": [
+          "view-profile",
+          "manage-account"
+        ]
+      },
+      "groups": [
+        "/APP_USER/APP_ADMIN"
+      ]
+    },
+    {
+      "username": "owner-user@myapp.com",
+      "firstName": "Owner",
+      "lastName": "User",
+      "email": "owner-user@myapp.com",
+      "emailVerified": true,
+      "attributes": {
+        "locale": [
+          "pt-BR"
+        ]
+      },
+      "enabled": true,
+      "credentials": [
+        {
+          "type": "password",
+          "temporary": true,
+          "value": "changeit"
+        }
+      ],
+      "requiredActions": [
+        "UPDATE_PASSWORD"
+      ],
+      "clientRoles": {
+        "account": [
+          "view-profile",
+          "manage-account"
+        ]
+      },
+      "groups": [
+        "/APP_USER/APP_OWNER"
+      ]
+    }
+  ]
+}

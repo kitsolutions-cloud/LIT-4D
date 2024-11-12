@@ -249,7 +249,7 @@
       "username": "manager-user@myapp.com",
       "firstName": "Manager",
       "lastName": "User",
-      "email": "staff-user@myapp.com",
+      "email": "manager-user@myapp.com",
       "emailVerified": true,
       "attributes": {
         "locale": [

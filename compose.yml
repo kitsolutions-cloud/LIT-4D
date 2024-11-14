@@ -1,12 +1,12 @@
 services:
-  mailing_provider:
+  email_provider:
     build:
-      context: ./mailing_provider
+      context: ./email_provider
     env_file:
-      - ./mailing_provider/.env
+      - ./email_provider/.env
     restart: unless-stopped
     ports:
-      - "1080:1080"
+      - '1080:1080'
 
   oauth_provider:
     build:
@@ -15,7 +15,7 @@ services:
       - ./oauth_provider/.env
     restart: unless-stopped
     ports:
-      - "8080:8080"
+      - '8180:8180'
     depends_on:
       sqldb_provider:
         condition: service_started
@@ -27,7 +27,7 @@ services:
       - ./sqldb_provider/.env
     restart: unless-stopped
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}']
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
       interval: 10s
       retries: 5
       start_period: 30s
@@ -39,4 +39,4 @@ services:
       - ./sqldb_provider/.env
     restart: unless-stopped
     ports:
-      - "5433:10824"
+      - '5433:10824'

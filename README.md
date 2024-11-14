@@ -14,42 +14,64 @@ Solve a problem that everyone must face to start configurations within the servi
 
 ## Services & providers
 
-### 📨 Mailing Provider with [maildev](https://github.com/maildev/maildev?tab=readme-ov-file)
-
-Accessible on ports 1025 & [1080](http://localhost:1080)
-
-SMTP connection for configure client
+### 📨 E-mail Provider with [maildev](https://github.com/maildev/maildev?tab=readme-ov-file)
 
 ```dotenv
-host=localhost # or `mailing_provider` if you are connecting throught docker network
+host=localhost # or `email_provider` if you are connecting throught docker network
 port=1025
-sender|user=mail.sender@test.com
+sender|user=sender@email_provider.com
 password=changeit
 SSL=false
 TLS=false
-```
 
-Web client
-
-```dotenv
+# Web client
 webclient=http://localhost:1080
-user=mail.admin@test.com
+user=admin@email_provider.com
 password=changeit
 ```
 
 > [!NOTE]
 >
-> edit ./mailing_provider/.env for change the default vars, as you prefer
+> edit ./email_provider/.env for change or add more vars, as you prefer
+
 ---
 
 ### 🔐 OAuth2 provider with [keycloak](https://github.com/keycloak/keycloak?tab=readme-ov-file#open-source-identity-and-access-management)
 
 ```dotenv
+# Keycloak Admin
+helm_hostname=http://localhost:8180
+admin_helm=http://localhost:8180/admin
+admin_username=admin@oauth_provider.com
+admin_password=changeit
+
+# MyApp
+default_roles=APP_USER,APP_MANAGER,APP_ADMIN,APP_OWNER
+default_users=user@myapp.com,staff.user@myapp.com,manager.user@myapp.com,admin.user@myapp.com,owner.user@myapp.com
+defailt_passwords=changeit # must be confirm account to activate them
+
+# Account profile
+myapp_account_profile=http://localhost:8180/realms/pyapp/account
+```
+
+Example to get token from client myapp realm client
+
+```bash
+curl --location 'http://localhost:8180/realms/myapp/protocol/openid-connect/token' \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data-urlencode 'client_id=myapp-client' \
+--data-urlencode 'client_secret=...myapp realm > clients > myapp-client > secrets...' \
+--data-urlencode 'grant_type=password' \
+--data-urlencode 'username=user@myapp.com' \
+--data-urlencode 'password=changeit'
 ```
 
 > [!NOTE]
 >
-> edit ./oauth_provider/.env for change the default vars, as you prefer
+> Edit ./oauth_provider/.env for change the default vars, as you prefer
+>
+> Change the ./oauth_provider/helms/myapp.realm.json to add your custom configs for your necessities or create another one based on it.
+
 ---
 
 ### 📦 SQL database provider with [postgres](https://github.com/docker-library/docs/blob/master/postgres/README.md)
@@ -58,8 +80,8 @@ password=changeit
 host=localhost # or `sqldb_provider` if you are connecting throught docker network
 port=5432
 user=postgres
-password=d59b44d359cbd2e55cb76f2381a4b4a45560a8df
-default_db=lfis4d
+password=Po$tgre5
+default_db=myapp_db
 ```
 
 > [!NOTE]
@@ -67,6 +89,7 @@ default_db=lfis4d
 > edit ./sqldb_provider/.env for change the default vars, as you prefer
 >
 > For development porpuoses, access [localhost:5433](http://localhost:5433) to access chat2db with default credentials below login form.
+
 ---
 
 ## Initial setup

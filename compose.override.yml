@@ -1,5 +1,5 @@
 services:
-  mailing_provider:
+  email_provider:
     ports:
       - '1025:1025'
     command:

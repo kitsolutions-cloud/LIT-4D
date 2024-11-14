@@ -13,10 +13,10 @@
     "fromDisplayName": "Notification Sender - MY APP",
     "replyTo": "no-reply@myapp.com",
     "auth": "true",
-    "user": "mail.sender@test.com",
+    "user": "sender@email_provider.com",
     "password": "changeit",
     "starttls": "false",
-    "host": "mailing_provider",
+    "host": "email_provider",
     "port": "1025",
     "ssl": "false"
   },
@@ -52,16 +52,16 @@
       "fullScopeAllowed": true,
       "defaultClientScopes": [
         "web-origins",
-        "address",
         "phone",
         "offline_access",
         "profile",
+        "roles",
         "email"
       ],
       "optionalClientScopes": [
         "acr",
+        "address",
         "organization",
-        "roles",
         "microprofile-jwt",
         "basic"
       ]
@@ -74,7 +74,10 @@
           "name": "APP_USER",
           "description": "Common user that can access simple app resources.",
           "composite": false,
-          "clientRole": true
+          "clientRole": true,
+          "composites": {
+            "realm": ["offline_access"]
+          }
         },
         {
           "name": "APP_ADMIN",
@@ -146,7 +149,7 @@
           }
         },
         {
-          "name": "MANAGER",
+          "name": "APP_MANAGER",
           "path": "/APP_USER/APP_MANAGER",
           "clientRoles": {
             "myapp-client": [
@@ -214,10 +217,10 @@
       ]
     },
     {
-      "username": "staff-user@myapp.com",
+      "username": "staff.user@myapp.com",
       "firstName": "Staff",
       "lastName": "User",
-      "email": "staff-user@myapp.com",
+      "email": "staff.user@myapp.com",
       "emailVerified": true,
       "attributes": {
         "locale": [
@@ -246,10 +249,10 @@
       ]
     },
     {
-      "username": "manager-user@myapp.com",
+      "username": "manager.user@myapp.com",
       "firstName": "Manager",
       "lastName": "User",
-      "email": "manager-user@myapp.com",
+      "email": "manager.user@myapp.com",
       "emailVerified": true,
       "attributes": {
         "locale": [
@@ -278,10 +281,10 @@
       ]
     },
     {
-      "username": "admin-user@myapp.com",
+      "username": "admin.user@myapp.com",
       "firstName": "Admin",
       "lastName": "User",
-      "email": "admin-user@myapp.com",
+      "email": "admin.user@myapp.com",
       "emailVerified": true,
       "attributes": {
         "locale": [
@@ -310,10 +313,10 @@
       ]
     },
     {
-      "username": "owner-user@myapp.com",
+      "username": "owner.user@myapp.com",
       "firstName": "Owner",
       "lastName": "User",
-      "email": "owner-user@myapp.com",
+      "email": "owner.user@myapp.com",
       "emailVerified": true,
       "attributes": {
         "locale": [

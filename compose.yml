@@ -40,3 +40,12 @@ services:
     restart: unless-stopped
     ports:
       - '5433:10824'
+
+  aws_services_provider:
+    build:
+      context: ./aws_services_provider
+    env_file:
+      - ./aws_services_provider/.env
+    volumes:
+      - '/var/run/docker.sock:/var/run/docker.sock'
+      - ./aws_services_provider/ready.d/:/etc/localstack/init/ready.d/

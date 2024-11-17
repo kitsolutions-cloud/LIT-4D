@@ -6,15 +6,19 @@ services:
       - --log-mail-contents
 
   oauth_provider:
+    environment:
+      KC_HTTP_MANAGEMENT_PORT: 9000
+      KC_HTTP_MANAGEMENT_RELATIVE_PATH: '/'
     ports:
       - '9000:9000'
     command:
       - start-dev
       - --import-realm
-    environment:
-      KC_HTTP_MANAGEMENT_PORT: 9000
-      KC_HTTP_MANAGEMENT_RELATIVE_PATH: '/'
 
   sqldb_provider:
     ports:
       - '5432:5432'
+
+  aws_services_provider:
+    ports:
+      - '127.0.0.1:4566:4566'

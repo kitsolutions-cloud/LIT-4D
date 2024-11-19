@@ -17,22 +17,22 @@ Solve a problem that everyone must face to start configurations within the servi
 ### 📨 E-mail Provider with [maildev](https://github.com/maildev/maildev?tab=readme-ov-file)
 
 ```dotenv
-host=localhost # or `email_provider` if you are connecting throught docker network
+host=localhost # or `email-provider` if you are connecting throught docker network
 port=1025
-sender|user=sender@email_provider.com
+sender|user=sender@email-provider.com
 password=changeit
 SSL=false
 TLS=false
 
 # Web client
 webclient=http://localhost:1080
-user=admin@email_provider.com
+user=admin@email-provider.com
 password=changeit
 ```
 
 > [!NOTE]
 >
-> edit ./email_provider/.env for change or add more vars, as you prefer
+> edit ./email-provider/.env for change or add more vars, as you prefer
 
 ---
 
@@ -42,7 +42,7 @@ password=changeit
 # Keycloak Admin
 helm_hostname=http://localhost:8180
 admin_helm=http://localhost:8180/admin
-admin_username=admin@oauth_provider.com
+admin_username=admin@oauth-provider.com
 admin_password=changeit
 
 # MyApp
@@ -68,16 +68,16 @@ curl --location 'http://localhost:8180/realms/myapp/protocol/openid-connect/toke
 
 > [!NOTE]
 >
-> Edit ./oauth_provider/.env for change the default vars, as you prefer
+> Edit ./oauth-provider/.env for change the default vars, as you prefer
 >
-> Change the ./oauth_provider/helms/myapp.realm.json to add your custom configs for your necessities or create another one based on it.
+> Change the ./oauth-provider/helms/myapp.realm.json to add your custom configs for your necessities or create another one based on it.
 
 ---
 
 ### 📦 SQL database provider with [postgres](https://github.com/docker-library/docs/blob/master/postgres/README.md)
 
 ```dotenv
-host=localhost # or `sqldb_provider` if you are connecting throught docker network
+host=localhost # or `sqldb-provider` if you are connecting throught docker network
 port=5432
 user=postgres
 password=Po$tgre5
@@ -86,7 +86,7 @@ default_db=myapp_db
 
 > [!NOTE]
 >
-> edit ./sqldb_provider/.env for change the default vars, as you prefer
+> edit ./sqldb-provider/.env for change the default vars, as you prefer
 >
 > For development porpuoses, access [localhost:5433](http://localhost:5433) to access chat2db with default credentials below login form.
 

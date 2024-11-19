@@ -13,10 +13,10 @@
     "fromDisplayName": "Notification Sender - MY APP",
     "replyTo": "no-reply@myapp.com",
     "auth": "true",
-    "user": "sender@email_provider.com",
+    "user": "sender@email-provider.com",
     "password": "changeit",
     "starttls": "false",
-    "host": "email_provider",
+    "host": "email-provider",
     "port": "1025",
     "ssl": "false"
   },

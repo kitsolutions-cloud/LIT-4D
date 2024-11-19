@@ -1,11 +1,11 @@
 services:
-  email_provider:
+  email-provider:
     ports:
       - '1025:1025'
     command:
       - --log-mail-contents
 
-  oauth_provider:
+  oauth-provider:
     environment:
       KC_HTTP_MANAGEMENT_PORT: 9000
       KC_HTTP_MANAGEMENT_RELATIVE_PATH: '/'
@@ -15,10 +15,10 @@ services:
       - start-dev
       - --import-realm
 
-  sqldb_provider:
+  sqldb-provider:
     ports:
       - '5432:5432'
 
-  aws_services_provider:
+  aws-services-provider:
     ports:
       - '127.0.0.1:4566:4566'

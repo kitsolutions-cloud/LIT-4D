@@ -1,30 +1,32 @@
 services:
-  email_provider:
+  email-provider:
     build:
-      context: ./email_provider
+      context: ./email-provider
     env_file:
-      - ./email_provider/.env
+      - ./email-provider/.env
     restart: unless-stopped
     ports:
       - '1080:1080'
 
-  oauth_provider:
+  oauth-provider:
     build:
-      context: ./oauth_provider
+      context: ./oauth-provider
     env_file:
-      - ./oauth_provider/.env
+      - ./oauth-provider/.env
     restart: unless-stopped
     ports:
       - '8180:8180'
+    volumes:
+      - ./oauth-provider/providers:/opt/keycloak/providers
     depends_on:
-      sqldb_provider:
+      sqldb-provider:
         condition: service_started
 
-  sqldb_provider:
+  sqldb-provider:
     build:
-      context: ./sqldb_provider
+      context: ./sqldb-provider
     env_file:
-      - ./sqldb_provider/.env
+      - ./sqldb-provider/.env
     restart: unless-stopped
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
@@ -36,16 +38,16 @@ services:
   sqldbmngr_provider:
     image: chat2db/chat2db
     env_file:
-      - ./sqldb_provider/.env
+      - ./sqldb-provider/.env
     restart: unless-stopped
     ports:
       - '5433:10824'
 
-  aws_services_provider:
+  aws-services-provider:
     build:
-      context: ./aws_services_provider
+      context: ./aws-services-provider
     env_file:
-      - ./aws_services_provider/.env
+      - ./aws-services-provider/.env
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
-      - ./aws_services_provider/ready.d/:/etc/localstack/init/ready.d/
+      - ./aws-services-provider/ready.d/:/etc/localstack/init/ready.d/

@@ -18,6 +18,7 @@ services:
       - '8180:8180'
     volumes:
       - ./oauth-provider/providers:/opt/keycloak/providers
+      - ./oauth-provider/helms:/opt/keycloak/data/import
     depends_on:
       sqldb-provider:
         condition: service_started
@@ -51,3 +52,11 @@ services:
     volumes:
       - '/var/run/docker.sock:/var/run/docker.sock'
       - ./aws-services-provider/ready.d/:/etc/localstack/init/ready.d/
+
+  mongodb-provider:
+    build:
+      context: ./mongodb-provider
+    env_file:
+      - ./mongodb-provider/.env
+    volumes:
+      - ./mongodb-provider/.data:/data/db

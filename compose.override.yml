@@ -7,10 +7,10 @@ services:
 
   oauth-provider:
     environment:
-      KC_HTTP_MANAGEMENT_PORT: 9000
+      KC_HTTP_MANAGEMENT_PORT: 9001
       KC_HTTP_MANAGEMENT_RELATIVE_PATH: '/'
     ports:
-      - '9000:9000'
+      - '9001:9001'
     command:
       - start-dev
       - --import-realm
@@ -22,3 +22,7 @@ services:
   aws-services-provider:
     ports:
       - '127.0.0.1:4566:4566'
+  
+  mongodb-provider:
+    ports:
+      - '27017:27017'

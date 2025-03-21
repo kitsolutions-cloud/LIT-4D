@@ -26,3 +26,8 @@ services:
   mongodb-provider:
     ports:
       - '27017:27017'
+  
+  feature-flag-provider:
+    ports:
+      - '3000:3000'
+      - '3100:3100'

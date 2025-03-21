@@ -29,6 +29,8 @@ services:
     env_file:
       - ./sqldb-provider/.env
     restart: unless-stopped
+    volumes:
+      - ./sqldb-provider/.data:/var/lib/postgresql/data
     healthcheck:
       test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
       interval: 10s
@@ -37,12 +39,12 @@ services:
       timeout: 10s
 
   sqldbmngr_provider:
-    image: chat2db/chat2db
-    env_file:
-      - ./sqldb-provider/.env
+    environment:
+      - ADMINER_DESIGN=pepa-linha-dark
+    image: adminer
     restart: unless-stopped
     ports:
-      - '5433:10824'
+      - '5433:8080'
 
   aws-services-provider:
     build:
@@ -58,5 +60,15 @@ services:
       context: ./mongodb-provider
     env_file:
       - ./mongodb-provider/.env
+    restart: unless-stopped
     volumes:
-      - ./mongodb-provider/.data:/data/db
+      - ./mongodb-provider/.data/db:/data/db
+
+  feature-flag-provider:
+    build:
+      context: ./feature-flag-provider
+    env_file:
+      - ./feature-flag-provider/.env
+    restart: unless-stopped
+    volumes:
+      - ./feature-flag-provider/.data/uploads:/usr/local/src/app/packages/back-end/uploads

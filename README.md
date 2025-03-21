@@ -1,6 +1,6 @@
-# LIS4D
+# LIT-4D
 
-## Local Integration Services 4 Devs
+## Local Integration Tools 4 Devs
 
 The OpenSource toolkit that every developer needs to build the integration between local projects and external providers during in development staging.
 

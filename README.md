@@ -80,7 +80,7 @@ curl --location 'http://localhost:8180/realms/myapp/protocol/openid-connect/toke
 host=localhost # or `sqldb-provider` if you are connecting throught docker network
 port=5432
 user=postgres
-password=Po$tgre5
+password=P@stgre5
 default_db=myapp_db
 ```
 

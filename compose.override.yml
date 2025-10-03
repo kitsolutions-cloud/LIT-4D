@@ -10,10 +10,16 @@ services:
       KC_HTTP_MANAGEMENT_PORT: 9001
       KC_HTTP_MANAGEMENT_RELATIVE_PATH: '/'
     ports:
+      - '8180:8180'
       - '9001:9001'
     command:
       - start-dev
       - --import-realm
+      # - start
+      # - --import-realm
+      # - --hostname=witty-alpaca-current.ngrok-free.app
+      # - --proxy-headers=xforwarded
+      # - --http-enabled=true
 
   sqldb-provider:
     ports:
@@ -31,3 +37,18 @@ services:
     ports:
       - '3000:3000'
       - '3100:3100'
+
+  sqldbmngr_provider:
+    environment:
+      - ADMINER_DESIGN=pepa-linha-dark
+    image: adminer
+    ports:
+      - '5433:8080'
+
+  monitoring-provider-loki:
+    ports:
+      - '3100:3100'
+
+  monitoring-provider-grafana:
+    ports:
+      - '3000:3000'

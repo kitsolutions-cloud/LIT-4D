@@ -1,0 +1,51 @@
+server:
+  http_listen_port: 9080
+  grpc_listen_port: 0
+
+positions:
+  filename: /tmp/positions.yaml
+
+clients:
+  - url: http://monitoring-provider-loki:3100/loki/api/v1/push
+
+scrape_configs:
+  - job_name: goarena-api
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: goarena-api
+          __path__: /var/log/goarena-api.log  # Adjust the path as needed for your application logs
+    pipeline_stages:
+      - regex:
+          expression: '(?P<extracted_timestamp>\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2}))'
+      - json:
+          expressions:
+            level: log.level
+            logger: log.logger
+            message: message
+            user_id: user.id
+            service_name: service.name
+            service_version: service.version
+            http_request_id: http.request.id
+            http_request_method: http.request.method
+            http_request_body: http.request.body
+            process_id: process.id
+            process_thread_name: process.thread.name
+            error_type: error.type
+            error_message: error.message
+            error_stack_trace: error.stack_trace
+      - labels:
+          level:
+          logger:
+          service_name:
+          service_version:
+          http_request_method:
+          message:
+          error_type:
+          error_message:
+          error_stack_trace:
+      - timestamp:
+          source: extracted_timestamp
+          format: RFC3339
+          location: UTC

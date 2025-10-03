@@ -1,0 +1,10 @@
+version: 3
+agent:
+  authtoken: token # retrieve yours on https://dashboard.ngrok.com/get-started/your-authtoken
+  web_addr: 4040
+
+endpoints:
+  - name: keycloak
+    url: dummy-random-url.app # retrieve yours on https://dashboard.ngrok.com/domains
+    upstream:
+      url: http://localhost:8180

@@ -60,12 +60,13 @@ def main():
         epilog="""Examples:
   python scripts/automations.py -p aws_services_provider -f create_env
   python scripts/automations.py --provider sqldb-provider --function create_env
+  python scripts/automations.py -f create_env
 """
     )
     
     parser.add_argument(
         "-p", "--provider", 
-        required=True, 
+        required=False, 
         help="The name of the provider script (e.g., aws_services_provider or aws-services-provider)."
     )
     parser.add_argument(
@@ -76,26 +77,44 @@ def main():
 
     args = parser.parse_args()
 
-    # Normalize provider name (replace '-' with '_')
-    provider_name = args.provider.replace("-", "_")
     function_name = args.function
+    
+    if args.provider:
+        # Normalize provider name (replace '-' with '_')
+        provider_name = args.provider.replace("-", "_")
 
-    # Validate provider name exists in the allowed list
-    if provider_name not in PROVIDERS:
-        print(f"Error: Provider '{provider_name}' is not allowed or not implemented.")
-        sys.exit(1)
+        # Validate provider name exists in the allowed list
+        if provider_name not in PROVIDERS:
+            print(f"Error: Provider '{provider_name}' is not allowed or not implemented.")
+            sys.exit(1)
 
-    # Validate function name exists for the provider
-    if function_name not in PROVIDERS[provider_name]:
-        print(f"Error: Function '{function_name}' not found for provider '{provider_name}'.")
-        sys.exit(1)
+        # Validate function name exists for the provider
+        if function_name not in PROVIDERS[provider_name]:
+            print(f"Error: Function '{function_name}' not found for provider '{provider_name}'.")
+            sys.exit(1)
 
-    try:
-        # Call the fixed function directly from the mapping
-        func = PROVIDERS[provider_name][function_name]
-        func()
-    except Exception as e:
-        print(f"An unexpected error occurred: {e}")
+        try:
+            # Call the fixed function directly from the mapping
+            func = PROVIDERS[provider_name][function_name]
+            print(f"Running '{function_name}' for provider '{provider_name}'...")
+            func()
+        except Exception as e:
+            print(f"An unexpected error occurred for provider '{provider_name}': {e}")
+    else:
+        # Run for all providers that have the function
+        found_at_least_one = False
+        for provider_name, functions in PROVIDERS.items():
+            if function_name in functions:
+                found_at_least_one = True
+                try:
+                    print(f"Running '{function_name}' for provider '{provider_name}'...")
+                    functions[function_name]()
+                except Exception as e:
+                    print(f"An unexpected error occurred for provider '{provider_name}': {e}")
+        
+        if not found_at_least_one:
+            print(f"Error: Function '{function_name}' not found in any provider.")
+            sys.exit(1)
 
 if __name__ == "__main__":
     main()

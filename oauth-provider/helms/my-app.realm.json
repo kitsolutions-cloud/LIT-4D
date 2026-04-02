@@ -1,5 +1,5 @@
 {
-  "realm": "myapp",
+  "realm": "my-app",
   "displayName": "My App",
   "enabled": true,
   "sslRequired": "external",
@@ -9,9 +9,9 @@
   "verifyEmail": true,
   "loginWithEmailAllowed": true,
   "smtpServer": {
-    "from": "notification.sender@myapp.com",
+    "from": "notification.sender@my-app.com",
     "fromDisplayName": "Notification Sender - MY APP",
-    "replyTo": "no-reply@myapp.com",
+    "replyTo": "no-reply@my-app.com",
     "auth": "true",
     "user": "sender@email-provider.com",
     "password": "changeit",
@@ -29,7 +29,7 @@
   ],
   "clients": [
     {
-      "clientId": "myapp-client",
+      "clientId": "my-app-client",
       "name": "My App Client",
       "description": "Client to access app managent app.",
       "rootUrl": "http://localhost:5173",
@@ -69,7 +69,7 @@
   ],
   "roles": {
     "client": {
-      "myapp-client": [
+      "my-app-client": [
         {
           "name": "APP_USER",
           "description": "Common user that can access simple app resources.",
@@ -85,7 +85,7 @@
           "composite": true,
           "composites": {
             "client": {
-              "myapp-client": [
+              "my-app-client": [
                 "APP_MANAGER"
               ]
             }
@@ -98,7 +98,7 @@
           "composite": true,
           "composites": {
             "client": {
-              "myapp-client": [
+              "my-app-client": [
                 "APP_ADMIN"
               ]
             }
@@ -111,7 +111,7 @@
           "composite": true,
           "composites": {
             "client": {
-              "myapp-client": [
+              "my-app-client": [
                 "APP_USER"
               ]
             }
@@ -124,7 +124,7 @@
           "composite": true,
           "composites": {
             "client": {
-              "myapp-client": [
+              "my-app-client": [
                 "APP_STAFF"
               ]
             }
@@ -143,7 +143,7 @@
           "name": "APP_ADMIN",
           "path": "/APP_USER/APP_ADMIN",
           "clientRoles": {
-            "myapp-client": [
+            "my-app-client": [
               "APP_ADMIN"
             ]
           }
@@ -152,7 +152,7 @@
           "name": "APP_MANAGER",
           "path": "/APP_USER/APP_MANAGER",
           "clientRoles": {
-            "myapp-client": [
+            "my-app-client": [
               "APP_MANAGER"
             ]
           }
@@ -161,7 +161,7 @@
           "name": "APP_OWNER",
           "path": "/APP_USER/APP_OWNER",
           "clientRoles": {
-            "myapp-client": [
+            "my-app-client": [
               "APP_OWNER"
             ]
           }
@@ -170,14 +170,14 @@
           "name": "APP_STAFF",
           "path": "/APP_USER/APP_STAFF",
           "clientRoles": {
-            "myapp-client": [
+            "my-app-client": [
               "APP_STAFF"
             ]
           }
         }
       ],
       "clientRoles": {
-        "myapp-client": [
+        "my-app-client": [
           "APP_USER"
         ]
       }
@@ -185,10 +185,10 @@
   ],
   "users": [
     {
-      "username": "user@myapp.com",
+      "username": "user@my-app.com",
       "firstName": "Common",
       "lastName": "User",
-      "email": "user@myapp.com",
+      "email": "user@my-app.com",
       "emailVerified": true,
       "attributes": {
         "locale": [
@@ -217,10 +217,10 @@
       ]
     },
     {
-      "username": "staff.user@myapp.com",
+      "username": "staff.user@my-app.com",
       "firstName": "Staff",
       "lastName": "User",
-      "email": "staff.user@myapp.com",
+      "email": "staff.user@my-app.com",
       "emailVerified": true,
       "attributes": {
         "locale": [
@@ -249,10 +249,10 @@
       ]
     },
     {
-      "username": "manager.user@myapp.com",
+      "username": "manager.user@my-app.com",
       "firstName": "Manager",
       "lastName": "User",
-      "email": "manager.user@myapp.com",
+      "email": "manager.user@my-app.com",
       "emailVerified": true,
       "attributes": {
         "locale": [
@@ -281,10 +281,10 @@
       ]
     },
     {
-      "username": "admin.user@myapp.com",
+      "username": "admin.user@my-app.com",
       "firstName": "Admin",
       "lastName": "User",
-      "email": "admin.user@myapp.com",
+      "email": "admin.user@my-app.com",
       "emailVerified": true,
       "attributes": {
         "locale": [
@@ -313,10 +313,10 @@
       ]
     },
     {
-      "username": "owner.user@myapp.com",
+      "username": "owner.user@my-app.com",
       "firstName": "Owner",
       "lastName": "User",
-      "email": "owner.user@myapp.com",
+      "email": "owner.user@my-app.com",
       "emailVerified": true,
       "attributes": {
         "locale": [

@@ -7,11 +7,11 @@ services:
 
   oauth-provider:
     environment:
-      KC_HTTP_MANAGEMENT_PORT: 9001
+      KC_HTTP_MANAGEMENT_PORT: 9101
       KC_HTTP_MANAGEMENT_RELATIVE_PATH: '/'
     ports:
       - '8180:8180'
-      - '9001:9001'
+      - '9101:9101'
     command:
       - start-dev
       - --import-realm

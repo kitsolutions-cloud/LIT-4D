@@ -1,0 +1,2 @@
+# No external dependencies required for the current automation scripts.
+# All scripts use Python standard libraries (os, shutil, pathlib, argparse, importlib, sys).

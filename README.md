@@ -19,6 +19,7 @@ For example, you can:
 
 - [Docker 🐋👍🏼](https://docs.docker.com/engine/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
+- [Python 3.12+](https://www.python.org/downloads/) (Required to execute automation scripts)
 
 ---
 
@@ -38,26 +39,41 @@ Detailed configuration for each provider can be found in their respective direct
 
 ## Initial Setup
 
-1. Configure environment variables in the respective provider directories (e.g., `./email-provider/.env`) if needed.
-2. Build and start the services:
+1. Prepare the automation scripts:
+   ```bash
+   # Create virtual environment
+   python -m venv scripts/.venv
+   
+   # Activate it
+   # On macOS/Linux:
+   source scripts/.venv/bin/activate
+   # On Windows:
+   # scripts\.venv\Scripts\activate
+   
+   # Install dependencies
+   pip install -r scripts/requirements.txt
+   ```
+2. Configure environment variables in the respective provider directories (e.g., `./email-provider/.env`) if needed.
+3. Build and start the services:
    ```bash
    docker compose up -d
    ```
-3. Verify the ports are available and services are running.
+4. Verify the ports are available and services are running.
 
 ---
 
 ## Future plans
 
 ### Services to add
-- [ ] ☝🏼 Reverse proxy with [traefik](https://github.com/traefik/traefik?tab=readme-ov-file#documentation)
-- [ ] ☝🏼 Storage service (like s3) with [minio](https://min.io/docs/minio/container/index.html#quickstart-for-containers)
-- [ ] ☝🏼 And much more... 👀
+- [ ] ☝ Reverse proxy with [traefik](https://github.com/traefik/traefik?tab=readme-ov-file#documentation)
+- [ ] ☝ Storage service (like s3) with [minio](https://min.io/docs/minio/container/index.html#quickstart-for-containers)
+- [ ] ☝ And all other essentials that I don't remember right now...
 
 ### Automations
-- [ ] 💡 Create unique .env file based on their providers
-- [ ] 💡 Script for create databases at runtime
-- [ ] 💡 Script for creating custom helms
+- [x] 💡 Create .env file based on their script providers
+- [ ] 💡 Script for create sql databases at runtime
+- [ ] 💡 Script for creating custom keycloak helms
+- [ ] 💡 And more...
 
 ---
 

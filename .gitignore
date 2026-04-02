@@ -9,3 +9,14 @@ ngrok.yml
 
 .vscode
 !.vscode/settings.json
+
+.installed.cfg
+.venv
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+*.manifest
+*.spec
+__pycache__/
+*.py[cod]
+*$py.class

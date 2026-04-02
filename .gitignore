@@ -4,3 +4,8 @@
 **/*.data/
 ngrok.yml
 .env
+
+.idea
+
+.vscode
+!.vscode/settings.json

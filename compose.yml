@@ -58,33 +58,5 @@ services:
     volumes:
       - ./feature-flag-provider/.data/uploads:/usr/local/src/app/packages/back-end/uploads
 
-  monitoring-provider-loki:
-    build:
-      context: ./monitoring-provider/loki
-    env_file:
-      - ./monitoring-provider/loki/.env
-    volumes:
-      - ./monitoring-provider/loki/.data:/loki
-    command: "-config.file=/etc/loki/local-config.yaml"
-  
-  monitoring-provider-promtail:
-    build:
-      context: ./monitoring-provider/promtail
-    env_file:
-      - ./monitoring-provider/promtail/.env
-    volumes:
-      - ./monitoring-provider/promtail/config.yaml:/etc/promtail/config.yaml
-      - ./monitoring-provider/promtail/app-logs/:/var/log/ # Adjust the path as needed for your application logs
-    command: "--config.file=/etc/promtail/config.yaml"
-
-  monitoring-provider-grafana:
-    build:
-      context: ./monitoring-provider/grafana
-    env_file:
-      - ./monitoring-provider/grafana/.env
-    volumes:
-      - ./monitoring-provider/grafana/.data:/var/lib/grafana
-      - ./monitoring-provider/grafana/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
-    depends_on:
-      - monitoring-provider-loki
-      - monitoring-provider-promtail
+include:
+  - path: ./monitoring-provider/compose.yml

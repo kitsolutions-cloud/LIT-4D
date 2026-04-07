@@ -1,0 +1,31 @@
+services:
+  monitoring-provider-loki:
+    build:
+      context: ./loki
+    env_file:
+      - ./loki/.env
+    volumes:
+      - ./loki/.data:/loki
+    command: "-config.file=/etc/loki/local-config.yaml"
+  
+  monitoring-provider-promtail:
+    build:
+      context: ./promtail
+    env_file:
+      - ./promtail/.env
+    volumes:
+      - ./promtail/config.yaml:/etc/promtail/config.yaml
+      - ./promtail/app-logs/:/var/log/ # Adjust the path as needed for your application logs
+    command: "--config.file=/etc/promtail/config.yaml"
+
+  monitoring-provider-grafana:
+    build:
+      context: ./grafana
+    env_file:
+      - ./grafana/.env
+    volumes:
+      - ./grafana/.data:/var/lib/grafana
+      - ./grafana/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+    depends_on:
+      - monitoring-provider-loki
+      - monitoring-provider-promtail

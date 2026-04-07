@@ -2,6 +2,8 @@ services:
   email-provider:
     build:
       context: ./email-provider
+      args:
+        - PROVIDER_VERSION=${EMAIL_PROVIDER_IMAGE_VERSION}
     env_file:
       - ./email-provider/.env
     ports:
@@ -10,6 +12,8 @@ services:
   oauth-provider:
     build:
       context: ./oauth-provider
+      args:
+        - PROVIDER_VERSION=${OAUTH_PROVIDER_IMAGE_VERSION}
     env_file:
       - ./oauth-provider/.env
     volumes:
@@ -22,6 +26,8 @@ services:
   sqldb-provider:
     build:
       context: ./sqldb-provider
+      args:
+        - PROVIDER_VERSION=${SQLDB_PROVIDER_IMAGE_VERSION}
     env_file:
       - ./sqldb-provider/.env
     volumes:
@@ -36,6 +42,8 @@ services:
   aws-services-provider:
     build:
       context: ./aws-services-provider
+      args:
+        - PROVIDER_VERSION=${AWS_SERVICES_PROVIDER_IMAGE_VERSION}
     env_file:
       - ./aws-services-provider/.env
     volumes:
@@ -45,6 +53,8 @@ services:
   mongodb-provider:
     build:
       context: ./mongodb-provider
+      args:
+        - PROVIDER_VERSION=${MONGODB_PROVIDER_IMAGE_VERSION}
     env_file:
       - ./mongodb-provider/.env
     volumes:
@@ -53,6 +63,8 @@ services:
   feature-flag-provider:
     build:
       context: ./feature-flag-provider
+      args:
+        - PROVIDER_VERSION=${FEATURE_FLAG_PROVIDER_IMAGE_VERSION}
     env_file:
       - ./feature-flag-provider/.env
     volumes:

@@ -11,9 +11,9 @@
 
 The configuration is managed by the `.env` file in this directory.
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `MONGO_INITDB_ROOT_USERNAME` | Root administrator username | `root` |
+| Variable                     | Description                 | Default    |
+|------------------------------|-----------------------------|------------|
+| `MONGO_INITDB_ROOT_USERNAME` | Root administrator username | `root`     |
 | `MONGO_INITDB_ROOT_PASSWORD` | Root administrator password | `change1t` |
 
 ---

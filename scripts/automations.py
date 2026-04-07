@@ -9,43 +9,61 @@ if scripts_dir not in sys.path:
 
 # Import all provider modules
 import aws_services_provider.create_env as aws_services_provider_create_env
+import aws_services_provider.change_version as aws_services_provider_change_version
 import email_provider.create_env as email_provider_create_env
+import email_provider.change_version as email_provider_change_version
 import feature_flag_provider.create_env as feature_flag_provider_create_env
+import feature_flag_provider.change_version as feature_flag_provider_change_version
 import mongodb_provider.create_env as mongodb_provider_create_env
+import mongodb_provider.change_version as mongodb_provider_change_version
 import monitoring_provider_grafana.create_env as monitoring_provider_grafana_create_env
+import monitoring_provider_grafana.change_version as monitoring_provider_grafana_change_version
 import monitoring_provider_loki.create_env as monitoring_provider_loki_create_env
+import monitoring_provider_loki.change_version as monitoring_provider_loki_change_version
 import monitoring_provider_alloy.create_env as monitoring_provider_alloy_create_env
+import monitoring_provider_alloy.change_version as monitoring_provider_alloy_change_version
 import oauth_provider.create_env as oauth_provider_create_env
+import oauth_provider.change_version as oauth_provider_change_version
 import sqldb_provider.create_env as sqldb_provider_create_env
+import sqldb_provider.change_version as sqldb_provider_change_version
 
 # Fixed function mapping for providers
 PROVIDERS = {
     "aws_services_provider": {
-        "create_env": aws_services_provider_create_env.create_env
+        "create_env": aws_services_provider_create_env.create_env,
+        "change_version": aws_services_provider_change_version.change_version,
     },
     "email_provider": {
-        "create_env": email_provider_create_env.create_env
+        "create_env": email_provider_create_env.create_env,
+        "change_version": email_provider_change_version.change_version,
     },
     "feature_flag_provider": {
-        "create_env": feature_flag_provider_create_env.create_env
+        "create_env": feature_flag_provider_create_env.create_env,
+        "change_version": feature_flag_provider_change_version.change_version,
     },
     "mongodb_provider": {
-        "create_env": mongodb_provider_create_env.create_env
+        "create_env": mongodb_provider_create_env.create_env,
+        "change_version": mongodb_provider_change_version.change_version,
     },
     "monitoring_provider_grafana": {
-        "create_env": monitoring_provider_grafana_create_env.create_env
+        "create_env": monitoring_provider_grafana_create_env.create_env,
+        "change_version": monitoring_provider_grafana_change_version.change_version,
     },
     "monitoring_provider_loki": {
-        "create_env": monitoring_provider_loki_create_env.create_env
+        "create_env": monitoring_provider_loki_create_env.create_env,
+        "change_version": monitoring_provider_loki_change_version.change_version,
     },
     "monitoring_provider_alloy": {
-        "create_env": monitoring_provider_alloy_create_env.create_env
+        "create_env": monitoring_provider_alloy_create_env.create_env,
+        "change_version": monitoring_provider_alloy_change_version.change_version,
     },
     "oauth_provider": {
-        "create_env": oauth_provider_create_env.create_env
+        "create_env": oauth_provider_create_env.create_env,
+        "change_version": oauth_provider_change_version.change_version,
     },
     "sqldb_provider": {
-        "create_env": sqldb_provider_create_env.create_env
+        "create_env": sqldb_provider_create_env.create_env,
+        "change_version": sqldb_provider_change_version.change_version,
     },
 }
 
@@ -61,6 +79,8 @@ def main():
   python scripts/automations.py -p aws_services_provider -f create_env
   python scripts/automations.py --provider sqldb-provider --function create_env
   python scripts/automations.py -f create_env
+  python scripts/automations.py -p sqldb_provider -f change_version -v 15
+  python scripts/automations.py -f change_version -v latest
 """
     )
     
@@ -70,9 +90,14 @@ def main():
         help="The name of the provider script (e.g., aws_services_provider or aws-services-provider)."
     )
     parser.add_argument(
-        "-f", "--function", 
-        required=True, 
+        "-f", "--function",
+        required=True,
         help="The name of the function to execute from the provider script (e.g., create_env)."
+    )
+    parser.add_argument(
+        "-v", "--version",
+        required=False,
+        help="The image version to set (used by change_version, e.g., latest, 16, 26.0.5)."
     )
 
     args = parser.parse_args()
@@ -97,7 +122,10 @@ def main():
             # Call the fixed function directly from the mapping
             func = PROVIDERS[provider_name][function_name]
             print(f"Running '{function_name}' for provider '{provider_name}'...")
-            func()
+            if args.version is not None:
+                func(args.version)
+            else:
+                func()
         except Exception as e:
             print(f"An unexpected error occurred for provider '{provider_name}': {e}")
     else:
@@ -108,7 +136,10 @@ def main():
                 found_at_least_one = True
                 try:
                     print(f"Running '{function_name}' for provider '{provider_name}'...")
-                    functions[function_name]()
+                    if args.version is not None:
+                        functions[function_name](args.version)
+                    else:
+                        functions[function_name]()
                 except Exception as e:
                     print(f"An unexpected error occurred for provider '{provider_name}': {e}")
         

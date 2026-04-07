@@ -1,6 +1,7 @@
 # ☁️ AWS Services Provider (LocalStack)
 
-**LocalStack** provides a fully functional local AWS cloud stack. It is pre-configured to support SNS and SQS, including specific topics for Keycloak events.
+**LocalStack** provides a fully functional local AWS cloud stack. It is pre-configured to support SNS and SQS, including
+specific topics for Keycloak events.
 
 ## ⚙️ Configuration
 
@@ -12,12 +13,12 @@
 
 The configuration is managed by the `.env` file in this directory.
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `SERVICES` | List of AWS services to enable | `sns,sqs` |
-| `AWS_DEFAULT_REGION` | Default AWS region | `sa-east-1` |
-| `AWS_ACCESS_KEY_ID` | Mocked access key ID | `access-key` |
-| `AWS_SECRET_ACCESS_KEY` | Mocked secret access key | `secret-access-key` |
+| Variable                | Description                    | Default             |
+|-------------------------|--------------------------------|---------------------|
+| `SERVICES`              | List of AWS services to enable | `sns,sqs`           |
+| `AWS_DEFAULT_REGION`    | Default AWS region             | `sa-east-1`         |
+| `AWS_ACCESS_KEY_ID`     | Mocked access key ID           | `access-key`        |
+| `AWS_SECRET_ACCESS_KEY` | Mocked secret access key       | `secret-access-key` |
 
 ---
 
@@ -36,5 +37,6 @@ chmod +x ./aws-services-provider/ready.d/*
 ---
 
 > [!TIP]
-> Use the [AWS CLI](https://aws.amazon.com/cli/) or [LocalStack's CLI](https://github.com/localstack/localstack-cli) to interact with the services locally:
+> Use the [AWS CLI](https://aws.amazon.com/cli/) or [LocalStack's CLI](https://github.com/localstack/localstack-cli) to
+> interact with the services locally:
 > `aws --endpoint-url=http://localhost:4566 sns list-topics`

@@ -1,12 +1,18 @@
-# LIT-4D (Local Integration Tools 4 Devs)
+# LIT-4D (Light Integration Tool – 4 Devs)
 
-The OpenSource toolkit that every developer needs to build the integration between local projects and external providers during in development staging.
+The OpenSource toolkit that every developer needs to build the integration between local projects and external providers
+during in development staging.
+
+![LIT-4D](./assets/repo-banner.png)
 
 ## Main functionality / Problem to solve
 
-LIT-4D simplifies the process of setting up local versions of common cloud and infrastructure services. Instead of going through complex configuration, confirmation, validation, and billing processes with real cloud providers, you can use these local tools to test your integrations immediately.
+LIT-4D simplifies the process of setting up local versions of common cloud and infrastructure services. Instead of going
+through complex configuration, confirmation, validation, and billing processes with real cloud providers, you can use
+these local tools to test your integrations immediately.
 
 For example, you can:
+
 - Check how customers will receive welcome emails using a local SMTP relay (MailDev).
 - Manage identities and permissions locally (Keycloak).
 - Emulate AWS services like SNS and SQS (LocalStack).
@@ -17,7 +23,7 @@ For example, you can:
 
 ## Prerequisites
 
-- [Docker 🐋👍🏼](https://docs.docker.com/engine/install/)
+- [Docker](https://docs.docker.com/engine/install/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 - [Python 3.12+](https://www.python.org/downloads/) (Required to execute automation scripts)
 
@@ -62,18 +68,27 @@ Detailed configuration for each provider can be found in their respective direct
 
 ---
 
-## Future plans
+## To-Do
 
 ### Services to add
+
 - [ ] ☝ Reverse proxy with [traefik](https://github.com/traefik/traefik?tab=readme-ov-file#documentation)
 - [ ] ☝ Storage service (like s3) with [minio](https://min.io/docs/minio/container/index.html#quickstart-for-containers)
 - [ ] ☝ And all other essentials that I don't remember right now...
 
 ### Automations
-- [x] 💡 Create .env file based on their script providers
+
+- [x] 💡 Create self provider .env file
 - [ ] 💡 Script for create sql databases at runtime
 - [ ] 💡 Script for creating custom keycloak helms
+- [ ] 💡 Script to change providers configurations
+    - [x] Change provider version
+    - [ ] Change provider exposed ports
+    - [ ] Change .env provider variables
 - [ ] 💡 And more...
+
+### What-if? 👀
+ - [ ] Make production ready setup
 
 ---
 

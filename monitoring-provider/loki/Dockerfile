@@ -1,1 +1,2 @@
-FROM grafana/loki:latest
+ARG PROVIDER_VERSION=latest
+FROM grafana/loki:${PROVIDER_VERSION}

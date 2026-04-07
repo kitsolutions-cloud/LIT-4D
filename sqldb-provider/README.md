@@ -1,6 +1,7 @@
 # 📦 SQL Database Provider (PostgreSQL)
 
-**PostgreSQL** is the primary relational database. This service also includes **Adminer** as a web-based database management tool.
+**PostgreSQL** is the primary relational database. This service also includes **Adminer** as a web-based database
+management tool.
 
 ## ⚙️ Configuration
 
@@ -12,12 +13,12 @@
 
 The configuration is managed by the `.env` file in this directory.
 
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `POSTGRES_DB` | Name of the primary database | `my-app_db` |
-| `POSTGRES_USER` | Database administrator username | `postgres` |
-| `POSTGRES_PASSWORD` | Database administrator password | `P@stgre5` |
-| `POSTGRES_PORT` | PostgreSQL internal port | `5432` |
+| Variable            | Description                     | Default     |
+|---------------------|---------------------------------|-------------|
+| `POSTGRES_DB`       | Name of the primary database    | `my-app_db` |
+| `POSTGRES_USER`     | Database administrator username | `postgres`  |
+| `POSTGRES_PASSWORD` | Database administrator password | `P@stgre5`  |
+| `POSTGRES_PORT`     | PostgreSQL internal port        | `5432`      |
 
 ### 📂 Initial Data
 
@@ -26,4 +27,5 @@ The configuration is managed by the `.env` file in this directory.
 ---
 
 > [!TIP]
-> **Adminer** is pre-configured with the `pepa-linha-dark` design. Access it to manage your databases through a user-friendly interface.
+> **Adminer** is pre-configured with the `pepa-linha-dark` design. Access it to manage your databases through a
+> user-friendly interface.

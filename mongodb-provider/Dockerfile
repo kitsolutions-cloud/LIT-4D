@@ -1,1 +1,2 @@
-FROM mongo:latest
+ARG PROVIDER_VERSION=latest
+FROM mongo:${PROVIDER_VERSION}

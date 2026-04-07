@@ -1,1 +1,2 @@
-FROM quay.io/keycloak/keycloak:26.0.5
+ARG PROVIDER_VERSION=latest
+FROM quay.io/keycloak/keycloak:${PROVIDER_VERSION}

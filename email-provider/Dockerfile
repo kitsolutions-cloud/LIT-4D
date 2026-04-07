@@ -1,2 +1,3 @@
-FROM maildev/maildev
+ARG PROVIDER_VERSION=latest
+FROM maildev/maildev:${PROVIDER_VERSION}
 # SETUP

@@ -1,1 +1,2 @@
-FROM grafana/grafana:latest
+ARG PROVIDER_VERSION=latest
+FROM grafana/grafana:${PROVIDER_VERSION}

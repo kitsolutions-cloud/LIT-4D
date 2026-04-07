@@ -2,6 +2,8 @@ services:
   monitoring-provider-loki:
     build:
       context: ./loki
+      args:
+        - PROVIDER_VERSION=${MONITORING_PROVIDER_LOKI_IMAGE_VERSION}
     env_file:
       - ./loki/.env
     volumes:
@@ -11,6 +13,8 @@ services:
   monitoring-provider-alloy:
     build:
       context: ./alloy
+      args:
+        - PROVIDER_VERSION=${MONITORING_PROVIDER_ALLOY_IMAGE_VERSION}
     env_file:
       - ./alloy/.env
     volumes:
@@ -22,6 +26,8 @@ services:
   monitoring-provider-grafana:
     build:
       context: ./grafana
+      args:
+        - PROVIDER_VERSION=${MONITORING_PROVIDER_GRAFANA_IMAGE_VERSION}
     env_file:
       - ./grafana/.env
     volumes:

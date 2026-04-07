@@ -14,7 +14,7 @@ import feature_flag_provider.create_env as feature_flag_provider_create_env
 import mongodb_provider.create_env as mongodb_provider_create_env
 import monitoring_provider_grafana.create_env as monitoring_provider_grafana_create_env
 import monitoring_provider_loki.create_env as monitoring_provider_loki_create_env
-import monitoring_provider_promtail.create_env as monitoring_provider_promtail_create_env
+import monitoring_provider_alloy.create_env as monitoring_provider_alloy_create_env
 import oauth_provider.create_env as oauth_provider_create_env
 import sqldb_provider.create_env as sqldb_provider_create_env
 
@@ -38,8 +38,8 @@ PROVIDERS = {
     "monitoring_provider_loki": {
         "create_env": monitoring_provider_loki_create_env.create_env
     },
-    "monitoring_provider_promtail": {
-        "create_env": monitoring_provider_promtail_create_env.create_env
+    "monitoring_provider_alloy": {
+        "create_env": monitoring_provider_alloy_create_env.create_env
     },
     "oauth_provider": {
         "create_env": oauth_provider_create_env.create_env

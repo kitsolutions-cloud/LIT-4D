@@ -11,7 +11,7 @@ For example, you can:
 - Manage identities and permissions locally (Keycloak).
 - Emulate AWS services like SNS and SQS (LocalStack).
 - Manage feature flags without an external account (GrowthBook).
-- Monitor logs and metrics with a full observability stack (Grafana, Loki, Promtail).
+- Monitor logs and metrics with a full observability stack (Grafana, Loki, Alloy).
 
 ---
 

@@ -6,3 +6,7 @@ services:
   monitoring-provider-grafana:
     ports:
       - '3000:3000'
+
+  monitoring-provider-alloy:
+    ports:
+      - '12345:12345'

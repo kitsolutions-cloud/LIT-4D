@@ -3,9 +3,9 @@ from pathlib import Path
 
 def create_env():
     """
-    Creates a .env file based on .env.example for the monitoring-provider/promtail.
+    Creates a .env file based on .env.example for the monitoring-provider/alloy.
     """
-    provider_dir = Path("monitoring-provider/promtail")
+    provider_dir = Path("monitoring-provider/alloy")
     example_file = provider_dir / ".env.example"
     env_file = provider_dir / ".env"
     

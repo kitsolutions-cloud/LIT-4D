@@ -8,15 +8,16 @@ services:
       - ./loki/.data:/loki
     command: "-config.file=/etc/loki/local-config.yaml"
   
-  monitoring-provider-promtail:
+  monitoring-provider-alloy:
     build:
-      context: ./promtail
+      context: ./alloy
     env_file:
-      - ./promtail/.env
+      - ./alloy/.env
     volumes:
-      - ./promtail/config.yaml:/etc/promtail/config.yaml
-      - ./promtail/app-logs/:/var/log/ # Adjust the path as needed for your application logs
-    command: "--config.file=/etc/promtail/config.yaml"
+      - ./alloy/.data:/var/lib/alloy/data
+      - ./alloy/config.alloy:/etc/alloy/config.alloy
+      - ./alloy/app-logs/:/var/log/ # Adjust the path as needed for your application logs
+    command: [ "run", "/etc/alloy/config.alloy", "--storage.path=/var/lib/alloy/data", "--server.http.listen-addr=0.0.0.0:12345" ]
 
   monitoring-provider-grafana:
     build:
@@ -28,4 +29,4 @@ services:
       - ./grafana/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
     depends_on:
       - monitoring-provider-loki
-      - monitoring-provider-promtail
+      - monitoring-provider-alloy

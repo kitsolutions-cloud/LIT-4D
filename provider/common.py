@@ -56,34 +56,34 @@ def list_up_providers() -> list[Container]:
 
 class CommonProviderFunctions(object):
     """Common functions for all providers."""
-    PROVIDER_DIR: Path = None
-    PROVIDER_IMAGE_VERSION_LABEL: str = None
+    _PROVIDER_DIR: Path = None
+    _PROVIDER_IMAGE_VERSION_LABEL: str = None
 
     def dot_env(self, create: bool = None) -> None:
         """
         Configurations about .env in the provider path.
             :arg create: Create a new .env file if it does not exist.
         """
-        if self.PROVIDER_DIR is None:
+        if self._PROVIDER_DIR is None:
             raise Exception("PROVIDER_DIR is not defined.")
 
         if create is not None and create == True:
-            dot_env_file(env_path=self.PROVIDER_DIR)
-            print(f"{self.PROVIDER_DIR}/.env created.")
+            dot_env_file(env_path=self._PROVIDER_DIR)
+            print(f"{self._PROVIDER_DIR}/.env created.")
             return
 
     def config(self, image_version: str = None):
         """
         Configure provider settings.
-            :arg image_version: The version of the provider image to use.
+            :arg image_version: The container version/tag to use in the current provider.
         """
-        if self.PROVIDER_IMAGE_VERSION_LABEL is None:
+        if self._PROVIDER_IMAGE_VERSION_LABEL is None:
             raise Exception("PROVIDER_IMAGE_VERSION_LABEL is not defined.")
 
         if image_version is not None:
             set_dot_env_var(
                 env_path=settings.MAIN_DIR,
-                key=self.PROVIDER_IMAGE_VERSION_LABEL,
+                key=self._PROVIDER_IMAGE_VERSION_LABEL,
                 value=image_version
             )
-            print(f"{self.PROVIDER_IMAGE_VERSION_LABEL} set to {image_version}.")
+            print(f"{self._PROVIDER_IMAGE_VERSION_LABEL} set to {image_version}.")

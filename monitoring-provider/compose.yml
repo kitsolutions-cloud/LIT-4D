@@ -1,15 +1,4 @@
 services:
-  monitoring-provider-loki:
-    build:
-      context: ./loki
-      args:
-        - PROVIDER_VERSION=${MONITORING_PROVIDER_LOKI_IMAGE_VERSION}
-    env_file:
-      - ./loki/.env
-    volumes:
-      - ./loki/.data:/loki
-    command: "-config.file=/etc/loki/local-config.yaml"
-  
   monitoring-provider-alloy:
     build:
       context: ./alloy
@@ -21,7 +10,12 @@ services:
       - ./alloy/.data:/var/lib/alloy/data
       - ./alloy/config.alloy:/etc/alloy/config.alloy
       - ./alloy/app-logs/:/var/log/ # Adjust the path as needed for your application logs
-    command: [ "run", "/etc/alloy/config.alloy", "--storage.path=/var/lib/alloy/data", "--server.http.listen-addr=0.0.0.0:12345" ]
+    healthcheck:
+      test: [ "CMD", "curl -f http://localhost" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
 
   monitoring-provider-grafana:
     build:
@@ -34,5 +28,30 @@ services:
       - ./grafana/.data:/var/lib/grafana
       - ./grafana/datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
     depends_on:
-      - monitoring-provider-loki
-      - monitoring-provider-alloy
+      monitoring-provider-loki:
+        condition: service_healthy
+      monitoring-provider-alloy:
+        condition: service_healthy
+    healthcheck:
+      test: [ "CMD", "curl -f http://localhost" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
+
+  monitoring-provider-loki:
+    build:
+      context: ./loki
+      args:
+        - PROVIDER_VERSION=${MONITORING_PROVIDER_LOKI_IMAGE_VERSION}
+    env_file:
+      - ./loki/.env
+    volumes:
+      - ./loki/.data:/loki
+      - ./loki/config.yaml:/etc/loki/local-config.yaml
+    healthcheck:
+      test: [ "CMD", "/usr/bin/loki", "-health" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s

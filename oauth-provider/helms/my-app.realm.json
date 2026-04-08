@@ -1,32 +1,4 @@
 {
-  "realm": "my-app",
-  "displayName": "My App",
-  "enabled": true,
-  "sslRequired": "external",
-  "registrationAllowed": true,
-  "registrationEmailAsUsername": true,
-  "rememberMe": true,
-  "verifyEmail": true,
-  "loginWithEmailAllowed": true,
-  "smtpServer": {
-    "from": "notification.sender@my-app.com",
-    "fromDisplayName": "Notification Sender - MY APP",
-    "replyTo": "no-reply@my-app.com",
-    "auth": "true",
-    "user": "sender@email-provider.com",
-    "password": "changeit",
-    "starttls": "false",
-    "host": "email-provider",
-    "port": "1025",
-    "ssl": "false"
-  },
-  "userManagedAccessAllowed": true,
-  "internationalizationEnabled": true,
-  "supportedLocales": [
-    "pt-BR",
-    "en",
-    "es"
-  ],
   "clients": [
     {
       "clientId": "my-app-client",
@@ -67,6 +39,63 @@
       ]
     }
   ],
+  "displayName": "My App",
+  "enabled": true,
+  "groups": [
+    {
+      "name": "APP_USER",
+      "path": "/APP_USER",
+      "subGroups": [
+        {
+          "name": "APP_ADMIN",
+          "path": "/APP_USER/APP_ADMIN",
+          "clientRoles": {
+            "my-app-client": [
+              "APP_ADMIN"
+            ]
+          }
+        },
+        {
+          "name": "APP_MANAGER",
+          "path": "/APP_USER/APP_MANAGER",
+          "clientRoles": {
+            "my-app-client": [
+              "APP_MANAGER"
+            ]
+          }
+        },
+        {
+          "name": "APP_OWNER",
+          "path": "/APP_USER/APP_OWNER",
+          "clientRoles": {
+            "my-app-client": [
+              "APP_OWNER"
+            ]
+          }
+        },
+        {
+          "name": "APP_STAFF",
+          "path": "/APP_USER/APP_STAFF",
+          "clientRoles": {
+            "my-app-client": [
+              "APP_STAFF"
+            ]
+          }
+        }
+      ],
+      "clientRoles": {
+        "my-app-client": [
+          "APP_USER"
+        ]
+      }
+    }
+  ],
+  "internationalizationEnabled": true,
+  "loginWithEmailAllowed": true,
+  "realm": "my-app",
+  "registrationAllowed": true,
+  "registrationEmailAsUsername": true,
+  "rememberMe": true,
   "roles": {
     "client": {
       "my-app-client": [
@@ -76,7 +105,9 @@
           "composite": false,
           "clientRole": true,
           "composites": {
-            "realm": ["offline_access"]
+            "realm": [
+              "offline_access"
+            ]
           }
         },
         {
@@ -134,55 +165,25 @@
       ]
     }
   },
-  "groups": [
-    {
-      "name": "APP_USER",
-      "path": "/APP_USER",
-      "subGroups": [
-        {
-          "name": "APP_ADMIN",
-          "path": "/APP_USER/APP_ADMIN",
-          "clientRoles": {
-            "my-app-client": [
-              "APP_ADMIN"
-            ]
-          }
-        },
-        {
-          "name": "APP_MANAGER",
-          "path": "/APP_USER/APP_MANAGER",
-          "clientRoles": {
-            "my-app-client": [
-              "APP_MANAGER"
-            ]
-          }
-        },
-        {
-          "name": "APP_OWNER",
-          "path": "/APP_USER/APP_OWNER",
-          "clientRoles": {
-            "my-app-client": [
-              "APP_OWNER"
-            ]
-          }
-        },
-        {
-          "name": "APP_STAFF",
-          "path": "/APP_USER/APP_STAFF",
-          "clientRoles": {
-            "my-app-client": [
-              "APP_STAFF"
-            ]
-          }
-        }
-      ],
-      "clientRoles": {
-        "my-app-client": [
-          "APP_USER"
-        ]
-      }
-    }
+  "smtpServer": {
+    "from": "notification.sender@my-app.com",
+    "fromDisplayName": "Notification Sender - MY APP",
+    "replyTo": "no-reply@my-app.com",
+    "auth": "true",
+    "user": "sender@email-provider.com",
+    "password": "changeit",
+    "starttls": "false",
+    "host": "email-provider",
+    "port": "1025",
+    "ssl": "false"
+  },
+  "sslRequired": "external",
+  "supportedLocales": [
+    "pt-BR",
+    "en",
+    "es"
   ],
+  "userManagedAccessAllowed": true,
   "users": [
     {
       "username": "user@my-app.com",
@@ -344,5 +345,6 @@
         "/APP_USER/APP_OWNER"
       ]
     }
-  ]
+  ],
+  "verifyEmail": true
 }

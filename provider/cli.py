@@ -29,7 +29,7 @@ class CLI(object):
         self._root.define_default_providers_image_versions()
 
     def ps(self):
-        """List all containers providers up."""
+        """List all UP containers providers."""
         return self._root.list_up_providers()
 
 

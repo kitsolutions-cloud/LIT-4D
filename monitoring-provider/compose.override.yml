@@ -1,18 +1,25 @@
 services:
-  monitoring-provider-loki:
+  monitoring-provider-alloy:
     labels:
       project: lit-4d
     ports:
-      - '3100:3100'
+      - '12345:12345'
+    command: [ "run", "/etc/alloy/config.alloy", "--storage.path=/var/lib/alloy/data", "--server.http.listen-addr=0.0.0.0:12345" ]
+    healthcheck:
+      test: [ "CMD-SHELL", "curl -f http://localhost:12345/-/healthy" ]
 
   monitoring-provider-grafana:
     labels:
       project: lit-4d
     ports:
       - '3000:3000'
+    healthcheck:
+      test: [ "CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:3000/api/health || exit 1" ]
 
-  monitoring-provider-alloy:
+  monitoring-provider-loki:
     labels:
       project: lit-4d
     ports:
-      - '12345:12345'
+      - '3100:3100'
+      - '9096:9096'
+    command: "-config.file=/etc/loki/local-config.yaml"

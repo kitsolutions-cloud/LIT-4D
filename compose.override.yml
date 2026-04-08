@@ -3,6 +3,7 @@ services:
     labels:
       project: lit-4d
     ports:
+      - '1080:1080'
       - '1025:1025'
     command:
       - --log-mail-contents

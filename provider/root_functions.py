@@ -1,7 +1,5 @@
 from pathlib import Path
 
-from docker.models.containers import Container
-
 import aws_services_provider
 import common
 import email_provider
@@ -40,9 +38,9 @@ class RootFunctions(object):
         oauth_provider.functions.config(image_version="latest")
         sqldb_provider.functions.config(image_version="latest")
 
-    def list_up_providers(self) -> list[Container]:
-        """List all providers."""
-        return common.list_up_providers()
+    def list_up_providers(self) -> list[tuple[str | None, str]]:
+        """List all UP containers providers."""
+        return [(c.name, c.health) for c in common.list_up_providers()]
 
 
 functions = RootFunctions()

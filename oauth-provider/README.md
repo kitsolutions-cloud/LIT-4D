@@ -15,6 +15,10 @@ integration with SNS/SQS for event-driven architectures.
 - `./providers`: Custom Keycloak providers (JAR files).
 - `./helms`: Realm configuration files for import (e.g., `my-app.realm.json`).
 
+> [!tip]
+> Recommended see this [keycloak-json-schema](https://github.com/jirutka/keycloak-json-schema) to better understand the
+> structure of the JSON healm files.
+
 ### 🔑 Environment variables (.env)
 
 The configuration is managed by the `.env` file in this directory.

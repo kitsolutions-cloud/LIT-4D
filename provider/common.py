@@ -49,7 +49,11 @@ def remove_dot_env_var(env_path: Path, key: str) -> tuple[bool | None, str]:
 
 
 def list_up_providers() -> list[Container]:
-    """List the active providers from docker."""
+    """
+    List the all UP providers containers from docker_client marked with the label ``project=lit-4d``.
+
+    `docker ps --filter label='project=lit-4d'`
+    """
     containers: list[Container] = docker_client.containers.list(filters={"label": "project=lit-4d"})
     return containers
 

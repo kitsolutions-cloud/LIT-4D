@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from docker.models.containers import Container
+
 import common
 import settings
 
@@ -14,3 +16,7 @@ class RootFunctions(object):
     def define_default_provider_versions(self):
         """Define the provider image versions."""
         common.cli.oauth_provider.set_provider_version("latest")
+
+    def list_up_providers(self) -> list[Container]:
+        """List all providers."""
+        return common.list_up_providers()

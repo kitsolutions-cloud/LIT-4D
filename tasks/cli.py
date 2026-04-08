@@ -33,3 +33,7 @@ class CLI(object):
 
         self.root.create_dot_env_compose()
         self.root.define_default_provider_versions()
+
+    def list_up_providers(self):
+        """List all providers."""
+        return self.root.list_up_providers()

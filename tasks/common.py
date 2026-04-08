@@ -1,8 +1,13 @@
 from pathlib import Path
 
+from docker import from_env
+from docker.models.containers import Container
 from dotenv import unset_key, set_key, dotenv_values
 
 from cli import CLI
+
+docker_client = from_env()
+cli = CLI()
 
 
 def env_file(env_path: Path) -> Path:
@@ -44,4 +49,7 @@ def remove_env_var(env_path: Path, key: str) -> tuple[bool | None, str]:
     return unset_key(env_path, key)
 
 
-cli = CLI()
+def list_up_providers() -> list[Container]:
+    """List the active providers from docker."""
+    containers: list[Container] = docker_client.containers.list(filters={"label": "project=lit-4d"})
+    return containers

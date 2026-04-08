@@ -1,12 +1,18 @@
 services:
   monitoring-provider-loki:
+    labels:
+      project: lit-4d
     ports:
       - '3100:3100'
 
   monitoring-provider-grafana:
+    labels:
+      project: lit-4d
     ports:
       - '3000:3000'
 
   monitoring-provider-alloy:
+    labels:
+      project: lit-4d
     ports:
       - '12345:12345'

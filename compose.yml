@@ -17,6 +17,7 @@ services:
     volumes:
       - ./oauth-provider/providers:/opt/keycloak/providers
       - ./oauth-provider/helms:/opt/keycloak/data/import
+      - ./.provider-logs/oauth-provider:/opt/keycloak/data/log
     healthcheck:
       test: [ "CMD-SHELL", "/opt/keycloak/bin/static-curl -f localhost" ]
       interval: 10s
@@ -36,12 +37,15 @@ services:
       - ./sqldb-provider/.env
     volumes:
       - ./sqldb-provider/.data:/var/lib/postgresql/data
+      - ./sqldb-provider/psql.conf:/etc/psql.conf
+      - ./.provider-logs/sqldb-provider:/var/log/postgresql
     healthcheck:
       test: [ 'CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}' ]
       interval: 10s
       retries: 5
       start_period: 30s
       timeout: 10s
+    command: postgres -c config_file=/etc/psql.conf
 
   aws-services-provider:
     build:
@@ -73,6 +77,9 @@ services:
       retries: 5
       start_period: 30s
       timeout: 10s
+    depends_on:
+      sqldb-provider:
+        condition: service_healthy
 
   feature-flag-provider:
     build:

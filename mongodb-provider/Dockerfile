@@ -1,2 +1,2 @@
 ARG PROVIDER_VERSION
-FROM mongo:${PROVIDER_VERSION}
+FROM ghcr.io/ferretdb/ferretdb:${PROVIDER_VERSION}

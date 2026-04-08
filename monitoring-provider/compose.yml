@@ -9,7 +9,7 @@ services:
     volumes:
       - ./alloy/.data:/var/lib/alloy/data
       - ./alloy/config.alloy:/etc/alloy/config.alloy
-      - ./alloy/app-logs/:/var/log/ # Adjust the path as needed for your application logs
+      - ../.provider-logs/:/var/log/ # Adjust the path as needed for your application logs
     healthcheck:
       test: [ "CMD", "curl -f http://localhost" ]
       interval: 10s

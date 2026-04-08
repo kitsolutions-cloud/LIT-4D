@@ -62,6 +62,14 @@ class CommonProviderFunctions(object):
     """Common functions for all providers."""
     _PROVIDER_DIR: Path = None
     _PROVIDER_IMAGE_VERSION_LABEL: str = None
+    _PROVIDER_CONTAINER_NAME: str = None
+
+    def get_data_folder_path(self) -> Path:
+        """Get the mounted .data folder path of the provider."""
+        if self._PROVIDER_DIR is None:
+            raise Exception("PROVIDER_DIR is not defined.")
+
+        return self._PROVIDER_DIR / ".data"
 
     def dot_env(self, create: bool = None) -> None:
         """
@@ -90,4 +98,16 @@ class CommonProviderFunctions(object):
                 key=self._PROVIDER_IMAGE_VERSION_LABEL,
                 value=image_version
             )
-            print(f"{self._PROVIDER_IMAGE_VERSION_LABEL} set to {image_version}.")
+            print(f"{self._PROVIDER_IMAGE_VERSION_LABEL} set to '{image_version}'.")
+
+    def get_provider_container(self) -> Container | None:
+        """Get the provider container."""
+        containers = list_up_providers()
+        if len(containers) == 0:
+            return None
+
+        for c in containers:
+            if self._PROVIDER_CONTAINER_NAME in c.name:
+                return c
+
+        return None

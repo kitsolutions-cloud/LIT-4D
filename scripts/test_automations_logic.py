@@ -1,3 +1,5 @@
+# DEPRECATED: This test script is deprecated and will be removed in a future release.
+# Use the `tasks` package instead: python -m tasks
 import sys
 import os
 from unittest.mock import patch, MagicMock

@@ -1,3 +1,6 @@
+# DEPRECATED: This script is deprecated and will be removed in a future release.
+# Use the `tasks` package instead: python -m tasks
+import warnings
 import argparse
 import importlib
 import sys
@@ -29,9 +32,17 @@ PROVIDERS: dict[str, dict[str, Callable[..., None]]] = {
 
 def main() -> None:
     """
+    .. deprecated::
+        Use `python -m tasks` instead.
+
     Main script for automating provider-related tasks.
     Example usage: python scripts/automations.py -p sqldb_provider -f create_env
     """
+    warnings.warn(
+        "scripts.automations is deprecated. Use the `tasks` package instead: python -m tasks",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     parser = argparse.ArgumentParser(
         description="Automations main script to execute provider functions.",
         formatter_class=argparse.RawDescriptionHelpFormatter,

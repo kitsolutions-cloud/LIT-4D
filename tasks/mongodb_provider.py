@@ -1,0 +1,2 @@
+class MongodbProvider(object):
+    pass

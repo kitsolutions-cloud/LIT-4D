@@ -1,0 +1,2 @@
+class EmailProvider(object):
+    pass

@@ -1,0 +1,2 @@
+class MonitoringProvider(object):
+    pass

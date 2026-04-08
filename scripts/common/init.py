@@ -1,3 +1,6 @@
+# DEPRECATED: This module is deprecated and will be removed in a future release.
+# Use the `tasks` package instead: python -m tasks
+import warnings
 import importlib
 import sys
 import os
@@ -20,7 +23,16 @@ _PROVIDER_MODULES = [
 
 
 def init() -> None:
-    """Initialises all providers by creating their .env and setting version to latest."""
+    """Initialises all providers by creating their .env and setting version to latest.
+
+    .. deprecated::
+        Use `tasks` package instead: python -m tasks
+    """
+    warnings.warn(
+        "scripts.common.init.init is deprecated. Use the `tasks` package instead.",
+        DeprecationWarning,
+        stacklevel=2,
+    )
     for module_name in _PROVIDER_MODULES:
         module = importlib.import_module(module_name)
         print(f"Initialising '{module_name}'...")

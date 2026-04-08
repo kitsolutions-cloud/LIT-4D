@@ -48,16 +48,16 @@ Detailed configuration for each provider can be found in their respective direct
 1. Prepare the automation scripts:
    ```bash
    # Create virtual environment
-   python -m venv scripts/.venv
+   python -m venv .venv
    
    # Activate it
    # On macOS/Linux:
-   source scripts/.venv/bin/activate
+   source .venv/bin/activate
    # On Windows:
-   # scripts\.venv\Scripts\activate
+   # .venv\Scripts\activate
    
    # Install dependencies
-   pip install -r scripts/requirements.txt
+   pip install -r requirements.txt
    ```
 2. Configure environment variables in the respective provider directories (e.g., `./email-provider/.env`) if needed.
 3. Build and start the services:

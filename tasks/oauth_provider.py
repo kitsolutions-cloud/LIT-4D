@@ -1,0 +1,2 @@
+class OauthProvider(object):
+    pass

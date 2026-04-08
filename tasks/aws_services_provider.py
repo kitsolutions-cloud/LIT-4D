@@ -1,0 +1,3 @@
+
+class AwsServicesProvider(object):
+    pass

@@ -28,8 +28,8 @@ class CLI(object):
         self._root.create_default_providers_dot_env()
         self._root.define_default_providers_image_versions()
 
-    def list_up_providers(self):
-        """List all providers."""
+    def ps(self):
+        """List all containers providers up."""
         return self._root.list_up_providers()
 
 

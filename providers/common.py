@@ -9,7 +9,7 @@ import settings
 docker_client = from_env()
 
 
-def env_file(env_path: Path) -> Path:
+def dot_env_file(env_path: Path) -> Path:
     """Create a .env file in the given directory, else
     if already exists return it, else
     if exists .env.example create a copy of it."""
@@ -37,13 +37,13 @@ def env_file(env_path: Path) -> Path:
     return env_file_path
 
 
-def set_env_var(env_path: Path, key: str, value: str | int | bool) -> tuple[bool | None, str, str]:
+def set_dot_env_var(env_path: Path, key: str, value: str | int | bool) -> tuple[bool | None, str, str]:
     """Create an env variable in the given .env directory.
     If the .env does not exist, create a new one."""
-    return set_key(env_file(env_path), key, str(value))
+    return set_key(dot_env_file(env_path), key, str(value))
 
 
-def remove_env_var(env_path: Path, key: str) -> tuple[bool | None, str]:
+def remove_dot_env_var(env_path: Path, key: str) -> tuple[bool | None, str]:
     """Remove an env variable from the given .env directory."""
     return unset_key(env_path, key)
 
@@ -68,7 +68,7 @@ class CommonProviderFunctions(object):
             raise Exception("PROVIDER_DIR is not defined.")
 
         if create is not None and create == True:
-            env_file(env_path=self.PROVIDER_DIR)
+            dot_env_file(env_path=self.PROVIDER_DIR)
             print(f"{self.PROVIDER_DIR}/.env created.")
             return
 
@@ -81,7 +81,7 @@ class CommonProviderFunctions(object):
             raise Exception("PROVIDER_IMAGE_VERSION_LABEL is not defined.")
 
         if image_version is not None:
-            set_env_var(
+            set_dot_env_var(
                 env_path=settings.MAIN_DIR,
                 key=self.PROVIDER_IMAGE_VERSION_LABEL,
                 value=image_version

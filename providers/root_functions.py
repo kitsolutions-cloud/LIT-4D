@@ -18,7 +18,7 @@ class RootFunctions(object):
 
     def create_compose_dot_env(self) -> Path:
         """Create the .env file in the root directory to docker compose ARGS."""
-        return common.env_file(env_path=settings.MAIN_DIR)
+        return common.dot_env_file(env_path=settings.MAIN_DIR)
 
     def create_default_providers_dot_env(self):
         """Create the providers .env files."""

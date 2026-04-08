@@ -17,9 +17,15 @@ services:
     volumes:
       - ./oauth-provider/providers:/opt/keycloak/providers
       - ./oauth-provider/helms:/opt/keycloak/data/import
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/keycloak/bin/static-curl -f localhost" ]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
     depends_on:
       sqldb-provider:
-        condition: service_started
+        condition: service_healthy
 
   sqldb-provider:
     build:
@@ -31,7 +37,7 @@ services:
     volumes:
       - ./sqldb-provider/.data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}']
+      test: [ 'CMD-SHELL', 'pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}' ]
       interval: 10s
       retries: 5
       start_period: 30s
@@ -57,6 +63,16 @@ services:
       - ./mongodb-provider/.env
     volumes:
       - ./mongodb-provider/.data/db:/data/db
+    healthcheck:
+      test: >
+        mongosh --quiet --username $$MONGO_INITDB_ROOT_USERNAME
+        --password $$MONGO_INITDB_ROOT_PASSWORD
+        --authenticationDatabase admin
+        --eval 'db.runCommand({ping:1}).ok'
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 10s
 
   feature-flag-provider:
     build:

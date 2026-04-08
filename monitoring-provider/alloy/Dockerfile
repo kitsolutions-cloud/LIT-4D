@@ -1,4 +1,4 @@
-ARG PROVIDER_VERSION=latest
+ARG PROVIDER_VERSION
 FROM grafana/alloy:${PROVIDER_VERSION}
 
 RUN apt-get update && apt-get install -y curl

@@ -177,7 +177,7 @@
     "port": "1025",
     "ssl": "false"
   },
-  "sslRequired": "external",
+  "sslRequired": "none",
   "supportedLocales": [
     "pt-BR",
     "en",

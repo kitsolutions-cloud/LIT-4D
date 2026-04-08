@@ -11,20 +11,16 @@ services:
   oauth-provider:
     labels:
       project: lit-4d
-    environment:
-      KC_HTTP_MANAGEMENT_PORT: 9101
-      KC_HTTP_MANAGEMENT_RELATIVE_PATH: '/'
     ports:
       - '8180:8180'
       - '9101:9101'
+    healthcheck:
+      test: [ "CMD-SHELL", "/opt/keycloak/bin/static-curl -f localhost:9101/health/ready" ]
     command:
       - start-dev
       - --import-realm
       # - start
-      # - --import-realm
-      # - --hostname=witty-alpaca-current.ngrok-free.app
-      # - --proxy-headers=xforwarded
-      # - --http-enabled=true
+      # - --optimized
 
   sqldb-provider:
     labels:

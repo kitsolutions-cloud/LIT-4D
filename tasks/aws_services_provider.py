@@ -1,18 +1,11 @@
 import common
 import settings
 
-PROVIDER_DIR = settings.MAIN_DIR / 'aws-services-provider'
 
-
-class AwsServicesProvider(object):
+class AwsServicesProviderFunctions(common.CommonProviderFunctions):
     """A set of services provider functions to aws-services-provider."""
+    PROVIDER_DIR = settings.MAIN_DIR / 'aws-services-provider'
+    PROVIDER_IMAGE_VERSION_LABEL = "AWS_SERVICES_PROVIDER_IMAGE_VERSION"
 
-    def dot_env(self, create: bool = None) -> None:
-        """
-        Configurations about .env in the aws-services-provider.
-            :arg create: Create a new .env file if it does not exist.
-        """
-        if create is not None and create == True:
-            common.env_file(env_path=PROVIDER_DIR)
-            print(f"{PROVIDER_DIR}/.env created.")
-            return
+
+functions = AwsServicesProviderFunctions()

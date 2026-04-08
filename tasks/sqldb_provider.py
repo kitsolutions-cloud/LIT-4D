@@ -1,17 +1,11 @@
 import common
 import settings
 
-PROVIDER_DIR = settings.MAIN_DIR / 'sqldb-provider'
 
-
-class SqldbProvider(object):
+class SqldbProviderFunctions(common.CommonProviderFunctions):
     """A set of services provider functions to sqldb-provider."""
+    PROVIDER_DIR = settings.MAIN_DIR / 'sqldb-provider'
+    PROVIDER_IMAGE_VERSION_LABEL = "SQLDB_PROVIDER_IMAGE_VERSION"
 
-    def dot_env(self, create: bool = None) -> None:
-        """
-        Configurations about .env in the sqldb-provider.
-        """
-        if create is not None and create == True:
-            common.env_file(env_path=PROVIDER_DIR)
-            print(f"{PROVIDER_DIR}/.env created.")
-            return
+
+functions = SqldbProviderFunctions()

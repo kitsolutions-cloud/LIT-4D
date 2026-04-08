@@ -1,5 +1,6 @@
 import fire
-import common
+
+from cli import cli
 
 if __name__ == "__main__":
-    fire.Fire(common.cli)
+    fire.Fire(cli)

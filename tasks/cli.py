@@ -1,39 +1,36 @@
-from aws_services_provider import AwsServicesProvider
-from email_provider import EmailProvider
-from feature_flag_provider import FeatureFlagProvider
-from mongodb_provider import MongodbProvider
-from monitoring_provider import MonitoringProvider
-from oauth_provider import OauthProvider
-from root_functions import RootFunctions
-from sqldb_provider import SqldbProvider
+import aws_services_provider
+import email_provider
+import feature_flag_provider
+import mongodb_provider
+import monitoring_provider
+import oauth_provider
+import root_functions
+import sqldb_provider
 
 
 class CLI(object):
     """Common CLI for all providers functions."""
 
     def __init__(self):
-        self.aws_services_provider = AwsServicesProvider()
-        self.email_provider = EmailProvider()
-        self.feature_flag_provider = FeatureFlagProvider()
-        self.mongodb_provider = MongodbProvider()
-        self.monitoring_provider = MonitoringProvider()
-        self.oauth_provider = OauthProvider()
-        self.sqldb_provider = SqldbProvider()
-        self.root = RootFunctions()
+        self.aws_services = aws_services_provider.functions
+        self.email = email_provider.functions
+        self.feature_flag = feature_flag_provider.functions
+        self.mongodb = mongodb_provider.functions
+        self.monitoring = monitoring_provider.functions
+        self.oauth = oauth_provider.functions
+        self.sqldb = sqldb_provider.functions
+        self._root = root_functions.functions
 
     def init(self):
         """Start the scripts to initialize the providers configs."""
-        self.aws_services_provider.dot_env(create=True)
-        self.email_provider.dot_env(create=True)
-        self.feature_flag_provider.dot_env()
-        self.mongodb_provider.dot_env()
-        self.monitoring_provider.create_dot_env()
-        self.oauth_provider.dot_env()
-        self.sqldb_provider.dot_env()
 
-        self.root.create_dot_env_compose()
-        self.root.define_default_provider_versions()
+        self._root.create_compose_dot_env()
+        self._root.create_default_providers_dot_env()
+        self._root.define_default_providers_image_versions()
 
     def list_up_providers(self):
         """List all providers."""
-        return self.root.list_up_providers()
+        return self._root.list_up_providers()
+
+
+cli = CLI()

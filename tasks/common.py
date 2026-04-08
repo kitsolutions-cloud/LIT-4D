@@ -4,10 +4,9 @@ from docker import from_env
 from docker.models.containers import Container
 from dotenv import unset_key, set_key, dotenv_values
 
-from cli import CLI
+import settings
 
 docker_client = from_env()
-cli = CLI()
 
 
 def env_file(env_path: Path) -> Path:
@@ -53,3 +52,38 @@ def list_up_providers() -> list[Container]:
     """List the active providers from docker."""
     containers: list[Container] = docker_client.containers.list(filters={"label": "project=lit-4d"})
     return containers
+
+
+class CommonProviderFunctions(object):
+    """Common functions for all providers."""
+    PROVIDER_DIR: Path = None
+    PROVIDER_IMAGE_VERSION_LABEL: str = None
+
+    def dot_env(self, create: bool = None) -> None:
+        """
+        Configurations about .env in the provider path.
+            :arg create: Create a new .env file if it does not exist.
+        """
+        if self.PROVIDER_DIR is None:
+            raise Exception("PROVIDER_DIR is not defined.")
+
+        if create is not None and create == True:
+            env_file(env_path=self.PROVIDER_DIR)
+            print(f"{self.PROVIDER_DIR}/.env created.")
+            return
+
+    def config(self, image_version: str = None):
+        """
+        Configure provider settings.
+            :arg image_version: The version of the provider image to use.
+        """
+        if self.PROVIDER_IMAGE_VERSION_LABEL is None:
+            raise Exception("PROVIDER_IMAGE_VERSION_LABEL is not defined.")
+
+        if image_version is not None:
+            set_env_var(
+                env_path=settings.MAIN_DIR,
+                key=self.PROVIDER_IMAGE_VERSION_LABEL,
+                value=image_version
+            )
+            print(f"{self.PROVIDER_IMAGE_VERSION_LABEL} set to {image_version}.")

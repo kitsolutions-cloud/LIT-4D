@@ -1,5 +1,3 @@
-from pathlib import Path
-
 import common
 import settings
 
@@ -9,25 +7,43 @@ PROVIDER_DIR = settings.MAIN_DIR / 'monitoring-provider'
 class _MonitoringProviderAlloy(object):
     """The available functions to alloy service."""
 
-    def create_dot_env(self) -> Path:
-        """Create the .env file in the monitoring-provider/alloy directory."""
-        return common.env_file(env_path=PROVIDER_DIR / 'alloy')
+    def dot_env(self, create: bool = None) -> None:
+        """
+        Configurations about .env in the monitoring-provider/alloy.
+            :arg create: Create a new .env file if it does not exist.
+        """
+        if create is not None and create == True:
+            common.env_file(env_path=(PROVIDER_DIR / 'alloy'))
+            print(f"{PROVIDER_DIR}/.env created.")
+            return
 
 
 class _MonitoringProviderGrafana(object):
     """The available functions to alloy service."""
 
-    def create_dot_env(self) -> Path:
-        """Create the .env file in the monitoring-provider/grafana directory."""
-        return common.env_file(env_path=PROVIDER_DIR / 'grafana')
+    def dot_env(self, create: bool = None) -> None:
+        """
+        Configurations about .env in the monitoring-provider/grafana.
+            :arg create: Create a new .env file if it does not exist.
+        """
+        if create is not None and create == True:
+            common.env_file(env_path=(PROVIDER_DIR / 'grafana'))
+            print(f"{PROVIDER_DIR}/.env created.")
+            return
 
 
 class _MonitoringProviderLoki(object):
     """The available functions to alloy service."""
 
-    def create_dot_env(self) -> Path:
-        """Create the .env file in the monitoring-provider/loki directory."""
-        return common.env_file(env_path=PROVIDER_DIR / 'loki')
+    def dot_env(self, create: bool = None) -> None:
+        """
+        Configurations about .env in the monitoring-provider/loki.
+            :arg create: Create a new .env file if it does not exist.
+        """
+        if create is not None and create == True:
+            common.env_file(env_path=(PROVIDER_DIR / 'loki'))
+            print(f"{PROVIDER_DIR}/.env created.")
+            return
 
 
 class MonitoringProvider(object):
@@ -39,6 +55,6 @@ class MonitoringProvider(object):
         self.loki = _MonitoringProviderLoki()
 
     def create_dot_env(self):
-        self.alloy.create_dot_env()
-        self.grafana.create_dot_env()
-        self.loki.create_dot_env()
+        self.alloy.dot_env(create=True)
+        self.grafana.dot_env(create=True)
+        self.loki.dot_env(create=True)

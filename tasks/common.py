@@ -9,34 +9,34 @@ def env_file(env_path: Path) -> Path:
     """Create a .env file in the given directory, else
     if already exists return it, else
     if exists .env.example create a copy of it."""
-    example_file = env_path / ".env.example"
-    env_file = env_path / ".env"
+    example_file_path = env_path / ".env.example"
+    env_file_path = env_path / ".env"
 
-    if env_file.exists():
-        return env_file
+    if env_file_path.exists():
+        return env_file_path
 
-    if example_file.exists():
-        example_vars = dotenv_values(example_file)
+    if example_file_path.exists():
+        example_vars = dotenv_values(example_file_path)
 
         if len(example_vars.keys()) == 0:
-            print(f"Created empty {env_file}")
-            return env_file
+            print(f"Created empty {env_file_path}")
+            return env_file_path
 
         for key, value in example_vars.items():
-            set_key(env_file, key, value or "")
+            set_key(env_file_path, key, str(value or ""))
 
-        print(f"Created {env_file} from example")
+        print(f"Created {env_file_path} from example")
     else:
-        print(f"Created empty {env_file}")
-        env_file.touch()
+        print(f"Created empty {env_file_path}")
+        env_file_path.touch()
 
-    return env_file
+    return env_file_path
 
 
-def set_env_var(env_path: Path, key: str, value: str) -> tuple[bool | None, str, str]:
+def set_env_var(env_path: Path, key: str, value: str | int | bool) -> tuple[bool | None, str, str]:
     """Create an env variable in the given .env directory.
     If the .env does not exist, create a new one."""
-    return set_key(env_file(env_path), key, value)
+    return set_key(env_file(env_path), key, str(value))
 
 
 def remove_env_var(env_path: Path, key: str) -> tuple[bool | None, str]:

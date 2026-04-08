@@ -23,13 +23,13 @@ class CLI(object):
 
     def init(self):
         """Start the scripts to initialize the providers configs."""
-        self.aws_services_provider.create_dot_env()
-        self.email_provider.create_dot_env()
-        self.feature_flag_provider.create_dot_env()
-        self.mongodb_provider.create_dot_env()
+        self.aws_services_provider.dot_env(create=True)
+        self.email_provider.dot_env(create=True)
+        self.feature_flag_provider.dot_env()
+        self.mongodb_provider.dot_env()
         self.monitoring_provider.create_dot_env()
-        self.oauth_provider.create_dot_env()
-        self.sqldb_provider.create_dot_env()
+        self.oauth_provider.dot_env()
+        self.sqldb_provider.dot_env()
 
         self.root.create_dot_env_compose()
         self.root.define_default_provider_versions()

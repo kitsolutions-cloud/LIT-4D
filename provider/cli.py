@@ -22,7 +22,12 @@ class CLI(object):
         self._root = root_functions.functions
 
     def init(self):
-        """Start the scripts to initialize the providers configs."""
+        """
+        Sets all the provider default configs.
+        Run this command only after cloning the project.
+
+        It creates the .env files and sets the default image versions to `latest`.
+        """
 
         self._root.create_compose_dot_env()
         self._root.create_default_providers_dot_env()
